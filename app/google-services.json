@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "490179136934",
+    "firebase_url": "https://sgapp-538c9.firebaseio.com",
+    "project_id": "sgapp-538c9",
+    "storage_bucket": "sgapp-538c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490179136934:android:db77fa49fcea3fd8",
+        "android_client_info": {
+          "package_name": "uy.edu.ctc.sgapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490179136934-2cvbe1knai0rcpkae7166bg783uo8l11.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uy.edu.ctc.sgapp",
+            "certificate_hash": "9c42d5b8e856d2cad5501478d89c1f6dd96f476a"
+          }
+        },
+        {
+          "client_id": "490179136934-fa7dstuv8fn4dgarc18lp5ftue79t1dg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJhv7y6YS7PuyNuUJ1ufB8BBFrxlhrzYY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490179136934-fa7dstuv8fn4dgarc18lp5ftue79t1dg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
