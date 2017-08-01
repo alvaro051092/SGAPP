@@ -20,6 +20,9 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import uy.edu.ctc.sgapp.R;
 import uy.edu.ctc.sgapp.user_interface.MainActivity;
 
@@ -53,10 +56,19 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getData().size() > 0) {
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
-            if (/* Check if data needs to be processed by long running job */ true) {
+            if (/* Check if data needs to be processed by long running job */ false) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
                 scheduleJob();
             } else {
+
+                JSONObject datos = new JSONObject(remoteMessage.getData());
+                try {
+                    this.sendNotification(datos.getString("message"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
                 // Handle message within 10 seconds
                 handleNow();
             }
