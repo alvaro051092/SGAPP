@@ -13,6 +13,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.Seguridad;
+import uy.edu.ctc.sgapp.user_interface.Alvaro;
 import uy.edu.ctc.sgapp.user_interface.MainActivity;
 import uy.edu.ctc.sgapp.utiles.Mensajes;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
@@ -24,10 +25,10 @@ import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 public class ws_persona extends AsyncTask<String,Integer,Boolean> {
     private Retorno_MsgObj retorno;
-    private MainActivity mainActivity;
+    private Alvaro alvaro;
 
-    public ws_persona(MainActivity mAct) {
-        this.mainActivity = mAct;
+    public ws_persona(Alvaro mAct) {
+        this.alvaro = mAct;
     }
 
     protected Boolean doInBackground(String... params) {
@@ -110,7 +111,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             Log.e("RESULTADO", retorno.getObjeto().toString());
             Log.e("RESULTADO", retorno.getMensaje().getMensaje());
 
-            mainActivity.MiFuncion(retorno);
+            alvaro.MiFuncion(retorno);
         }
             /*
             //Rellenamos la lista con los nombres de los clientes
