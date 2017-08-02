@@ -11,7 +11,9 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import uy.edu.ctc.sgapp.R;
 import uy.edu.ctc.sgapp.logica.Seguridad;
+import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_login;
+import uy.edu.ctc.sgapp.web_service.ws_persona;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -40,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
         btnServicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ws_login login = new ws_login();
-                login.execute();
+                ws_persona persona = new ws_persona(MainActivity.this);
+                persona.execute();
             }
         });
 
@@ -67,5 +69,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void MiFuncion(Retorno_MsgObj retorno)
+    {
+        Toast.makeText(getApplicationContext(), "Persona: " + retorno.getObjeto().toString(), Toast.LENGTH_SHORT).show();
     }
 }

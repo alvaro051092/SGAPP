@@ -39,8 +39,6 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
         String usuario = "";
         String password = "";
 
-        Log.e("SERVICIO", "a");
-
         try {
             usuario = Seguridad.GetInstancia().crypt("alumno1").toString();
             password = Seguridad.GetInstancia().crypt("alumno1").toString();
@@ -48,47 +46,13 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
             e.printStackTrace();
         }
 
-        Log.e("SERVICIO", "b");
-        Log.e("SERVICIO", usuario);
-        Log.e("SERVICIO", password);
-
         request.addProperty("mdltoken", "mdltoken");
         request.addProperty("pUser", usuario);
         request.addProperty("pPassword", password);
 
-/*
-        PropertyInfo passwordProp =new PropertyInfo();
-        passwordProp.name="mdltoken";
-        passwordProp.type=PropertyInfo.STRING_CLASS;
-        passwordProp.setNamespace(NAMESPACE);
-        passwordProp.setValue("mdltoken");
-
-        request.addProperty(passwordProp);
-
-*/
-/*
-        PropertyInfo passwordProp =new PropertyInfo();
-        passwordProp.name="pPassword";
-        passwordProp.type=PropertyInfo.STRING_CLASS;
-        passwordProp.setNamespace(NAMESPACE);
-        passwordProp.setValue(password);
-
-        request.addProperty(passwordProp);
-
-        PropertyInfo userProp =new PropertyInfo();
-        userProp.name="pUser";
-        userProp.type=PropertyInfo.STRING_CLASS;
-        userProp.setNamespace(NAMESPACE);
-        userProp.setValue(usuario);
-
-        request.addProperty(userProp);
-*/
-
         envelope.setOutputSoapObject(request);
 
         HttpTransportSE transporte = new HttpTransportSE(URL);
-
-        Log.e("SERVICIO", "c");
 
         try
         {
