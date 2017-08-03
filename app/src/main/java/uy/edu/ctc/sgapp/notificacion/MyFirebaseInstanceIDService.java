@@ -5,6 +5,9 @@ import android.util.Log;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
+import uy.edu.ctc.sgapp.entidad.Persona;
+import uy.edu.ctc.sgapp.logica.loPersona;
+
 /**
  * Created by alvar on 31/07/2017.
  */
@@ -42,5 +45,12 @@ public class MyFirebaseInstanceIDService  extends FirebaseInstanceIdService {
      */
     private void sendRegistrationToServer(String token) {
         // TODO: Implement this method to send token to your app server.
+
+        if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
+            Persona persona = new Persona();
+            persona.setPerCod(loPersona.getInstancia(getApplicationContext()).DevolverCodigoPersona());
+            persona.setPerAppTkn(token);
+            loPersona.getInstancia(getApplicationContext()).ActualizarToken(persona);
+        }
     }
 }

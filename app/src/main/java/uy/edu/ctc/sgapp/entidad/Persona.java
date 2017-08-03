@@ -14,6 +14,7 @@ import uy.edu.ctc.sgapp.utiles.Utilidades;
  * Created by alvar on 01/08/2017.
  */
 
+
 public class Persona implements Serializable {
 
     private Long PerCod;
@@ -33,6 +34,7 @@ public class Persona implements Serializable {
     private Boolean PerNotApp;
     private String PerPass;
     private Integer PerCntIntLgn;
+    private String PerAppTkn;
     private Date PerFchLog;
     private Date ObjFchMod;
 
@@ -201,6 +203,13 @@ public class Persona implements Serializable {
         this.lstEstudios = lstEstudios;
     }
 
+    public String getPerAppTkn() {
+        return PerAppTkn;
+    }
+
+    public void setPerAppTkn(String perAppTkn) {
+        PerAppTkn = perAppTkn;
+    }
 
     public void setField(String fieldName, String content) {
 
@@ -217,6 +226,7 @@ public class Persona implements Serializable {
         if (fieldName.equals("perNroEstOrt")) this.setPerNroEstOrt(Integer.parseInt(content.trim()));
         if (fieldName.equals("perFil")) this.setPerFil(Filial.valueOf(content.trim()));
         if (fieldName.equals("perEml")) this.setPerEml(content.trim());
+        if (fieldName.equals("perAppTkn")) this.setPerAppTkn(content.trim());
         if (fieldName.equals("perNotEml")) this.setPerNotEml(Boolean.parseBoolean(content.trim()));
         if (fieldName.equals("perNotApp")) this.setPerNotApp(Boolean.parseBoolean(content.trim()));
         if (fieldName.equals("perPass")) this.setPerPass(content.trim());

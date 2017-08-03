@@ -1,5 +1,6 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +10,10 @@ import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
+import java.util.UUID;
+
 import uy.edu.ctc.sgapp.R;
+import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_persona;
@@ -41,18 +45,24 @@ public class Alvaro extends AppCompatActivity {
         btnServicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ws_persona persona = new ws_persona(Alvaro.this);
-                persona.execute();
+
+                Intent intent = new Intent(Alvaro.this, login.class);
+                startActivity(intent);
+
             }
         });
 
         btnAccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String texto = "alvaro";
+
+
+                String texto = "alumno1";
 
                 try {
                     String encriptado = Seguridad.GetInstancia().crypt(texto);
+
+                    Log.e("Encriptado", encriptado);
 
                     Toast.makeText(getApplicationContext(), "Encriptado: " + encriptado, Toast.LENGTH_SHORT).show();
 
@@ -72,6 +82,8 @@ public class Alvaro extends AppCompatActivity {
 
     public void MiFuncion(Retorno_MsgObj retorno)
     {
-        Toast.makeText(getApplicationContext(), "Persona: " + retorno.getObjeto().toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Persona: " + retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
+
+        if(!retorno.SurgioErrorObjetoRequerido()) Toast.makeText(getApplicationContext(), "Persona: " + retorno.getObjeto().toString(), Toast.LENGTH_SHORT).show();
     }
 }

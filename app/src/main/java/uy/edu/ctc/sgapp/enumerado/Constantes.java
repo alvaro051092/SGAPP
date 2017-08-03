@@ -10,7 +10,6 @@ package uy.edu.ctc.sgapp.enumerado;
  * @author Alvaro
  */
 public enum Constantes {
-    URL_FOLDER_SERVICIO_MDL("/webservice/rest/server.php"), 
     ENCRYPT_VECTOR_INICIO("a#!?d./*@@^^''_a"),
     ENCRYPT_SEMILLA("-KeY!!AD#AM!!KeY"),
     VERSION("0.1.0");

@@ -10,20 +10,33 @@ import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.logica.Seguridad;
+import uy.edu.ctc.sgapp.user_interface.Alvaro;
+import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 
 /**
  * Created by alvar on 01/08/2017.
  */
 
 public class ws_login extends AsyncTask<String,Integer,Boolean> {
-    //private Cliente[] listaClientes;
+    private Retorno_MsgObj retorno;
+    private Class clase;
+    private String metodo;
+    private Retorno_MsgObj parametro;
+
+    public ws_login(Class pCls, String pMetodo, Retorno_MsgObj pParametro) {
+        this.clase = pCls;
+        this.metodo = pMetodo;
+        this.parametro = pParametro;
+    }
 
     protected Boolean doInBackground(String... params) {
 
         Log.e("SERVICIO", "Iniciando servicio");
 
         boolean resul = true;
+
 
         final String NAMESPACE = "http://WebService/";
         final String URL="http://192.168.0.100:8084/GestionAcademica/ws_login";
@@ -34,7 +47,8 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
 
         SoapSerializationEnvelope envelope =
                 new SoapSerializationEnvelope(SoapEnvelope.VER11);
-        //envelope.dotNet = true;
+
+        Persona persona = (Persona) parametro.getObjeto();
 
         String usuario = "";
         String password = "";

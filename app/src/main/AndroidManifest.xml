@@ -30,7 +30,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".user_interface.Alvaro" />
-        <activity android:name=".user_interface.Alfredo"></activity>
+        <activity android:name=".user_interface.Alfredo" />
+        <activity android:name=".user_interface.login"></activity>
     </application>
 
 </manifest>
