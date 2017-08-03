@@ -2,6 +2,7 @@ package uy.edu.ctc.sgapp.logica;
 
 import android.content.Context;
 import android.provider.Settings;
+import android.util.Log;
 
 import java.util.UUID;
 
@@ -49,9 +50,12 @@ public class loPersona {
 
     public Long DevolverCodigoPersona(){
         Long perCod         = null;
+
+
         String strperCod    = cfg.Devolver().getPerCod();
 
-        if(strperCod != null) Long.parseLong(strperCod);
+
+        if(strperCod != null) perCod = Long.parseLong(strperCod);
 
         return perCod;
 
@@ -60,6 +64,12 @@ public class loPersona {
     public void GuardarCodigoPersona(Long PerCod){
         Configuracion configuracion = cfg.Devolver();
         configuracion.setPerCod(PerCod.toString());
+        cfg.Modificar(configuracion);
+    }
+
+    public void QuitarCodigoPersona(){
+        Configuracion configuracion = cfg.Devolver();
+        configuracion.setPerCod(null);
         cfg.Modificar(configuracion);
     }
 

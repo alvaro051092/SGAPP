@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SGAPP</string>
+    <string name="Usuario">Usuario</string>
+    <string name="Password">Contraseña</string>
 </resources>

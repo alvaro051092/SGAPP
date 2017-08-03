@@ -6,6 +6,7 @@ package uy.edu.ctc.sgapp.enumerado;
 
 public enum PersonaServicioMetodo {
     LOGIN,
+    LOGOUT,
     UPD_TOKEN,
     GET_PERSONA_USR,
     GET_PERSONA_COD;

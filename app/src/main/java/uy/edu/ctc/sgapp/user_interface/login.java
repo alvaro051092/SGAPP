@@ -22,6 +22,7 @@ public class login extends AppCompatActivity {
 
     private ProgressBar loading;
     private String usrTexto;
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +30,19 @@ public class login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         loading = (ProgressBar) findViewById(R.id.lgn_load);
-        final EditText usuario    = (EditText) findViewById(R.id.lgn_txt_user);
-        final EditText password   = (EditText) findViewById(R.id.lgn_txt_psw);
-        Button btnIniciar   = (Button) findViewById(R.id.lgn_btn_iniciar);
+        final EditText usuario      = (EditText) findViewById(R.id.lgn_txt_user);
+        final EditText password     = (EditText) findViewById(R.id.lgn_txt_psw);
+        Button btnIniciar           = (Button) findViewById(R.id.lgn_btn_iniciar);
+        btnLogout                   = (Button) findViewById(R.id.lgn_btn_logout);
+
+        if(loPersona.getInstancia(getApplicationContext()).SesionValida())
+        {
+            btnLogout.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            btnLogout.setVisibility(View.INVISIBLE);
+        }
 
         loading.setVisibility(View.INVISIBLE);
 
@@ -62,9 +73,31 @@ public class login extends AppCompatActivity {
             }
         });
 
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                CerrarSesion();
+
+            }
+        });
+
 
     }
 
+    private void CerrarSesion(){
+        if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
+
+            Persona persona = new Persona();
+            persona.setPerCod(loPersona.getInstancia(getApplicationContext()).DevolverCodigoPersona());
+
+            Retorno_MsgObj parametro = new Retorno_MsgObj();
+            parametro.setObjeto(persona);
+
+            ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.LOGOUT, parametro);
+            wsPersona.execute();
+        }
+    }
 
     private void IniciarSesion(String user, String password){
 
@@ -103,6 +136,30 @@ public class login extends AppCompatActivity {
         }
     }
 
+    private void RetornoLogout(Retorno_MsgObj retorno){
+        if(!retorno.SurgioError()){
+
+            loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();
+            loading.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), "Sesion cerrada correctamente", Toast.LENGTH_SHORT).show();
+
+            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
+            {
+                btnLogout.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                btnLogout.setVisibility(View.INVISIBLE);
+            }
+
+        }
+        else
+        {
+            loading.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     private void RetornoGetPersona(Retorno_MsgObj retorno){
         if(!retorno.SurgioErrorObjetoRequerido()){
@@ -113,6 +170,15 @@ public class login extends AppCompatActivity {
 
             persona.setPerAppTkn(FirebaseInstanceId.getInstance().getToken());
             loPersona.getInstancia(getApplicationContext()).ActualizarToken(persona);
+
+            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
+            {
+                btnLogout.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                btnLogout.setVisibility(View.INVISIBLE);
+            }
 
             loading.setVisibility(View.INVISIBLE);
         }

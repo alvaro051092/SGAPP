@@ -49,6 +49,9 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             case LOGIN: resul = this.Login();
                 metodoToCall = "RetornoLogin";
                 break;
+            case LOGOUT: resul = this.Logout();
+                metodoToCall = "RetornoLogout";
+                break;
             case GET_PERSONA_USR: resul = this.ObtenerPersonaByUser();
                 metodoToCall = "RetornoGetPersona";
                 break;
@@ -251,6 +254,8 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
         request.addProperty("pPerCod", persona.getPerCod());
         request.addProperty("pPerAppTkn", persona.getPerAppTkn());
 
+        Log.e("TOKEN", persona.getPerAppTkn());
+
         envelope.setOutputSoapObject(request);
 
         HttpTransportSE transporte = new HttpTransportSE(WS_Persona.servicio.URL);
@@ -347,6 +352,73 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             else
             {
                 retorno.setMensaje(new Mensajes("Usuario o contraseña incorrectos", TipoMensaje.ERROR));
+            }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            resul = false;
+        }
+
+        return resul;
+    }
+
+    private Boolean Logout(){
+        Log.e("SERVICIO", "Iniciando servicio");
+
+        boolean resul   = true;
+        retorno         = new Retorno_MsgObj(new Mensajes("Error", TipoMensaje.ERROR));
+
+        Persona persona = (Persona) parametro.getObjeto();
+
+
+        SoapObject request = new SoapObject(WS_Login.servicio.NAMESPACE, WS_Login.Logout.METHOD_NAME);
+
+        SoapSerializationEnvelope envelope =
+                new SoapSerializationEnvelope(SoapEnvelope.VER11);
+
+        String PerCod = "";
+
+        try {
+            PerCod = Seguridad.GetInstancia().crypt(persona.getPerCod().toString()).toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        request.addProperty("token", "token");
+        request.addProperty("pPerCod", PerCod);
+
+        envelope.setOutputSoapObject(request);
+
+        HttpTransportSE transporte = new HttpTransportSE(WS_Login.servicio.URL);
+
+        try
+        {
+            transporte.call(WS_Login.Logout.SOAP_ACTION, envelope);
+
+            SoapObject resSoapObj =(SoapObject) envelope.getResponse();
+
+
+            for (int i = 0; i < resSoapObj.getPropertyCount(); i++)
+            {
+                SoapObject ic = (SoapObject) resSoapObj.getProperty(i);
+
+                PropertyInfo pi_ = new PropertyInfo();
+                resSoapObj.getPropertyInfo(i, pi_);
+
+                String objetoPadre = pi_.name;
+
+                for (int f = 0; f < ic.getPropertyCount(); f++) {
+
+                    PropertyInfo pi = new PropertyInfo();
+                    ic.getPropertyInfo(f, pi);
+
+                    Log.e("RESULTADO", pi.name + " : " + ic.getProperty(f).toString());
+
+                    if(objetoPadre.equals("mensaje")) retorno.setField(pi.name, ic.getProperty(f).toString());
+
+                }
             }
 
         }
