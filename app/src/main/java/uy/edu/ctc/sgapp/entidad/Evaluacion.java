@@ -8,6 +8,8 @@ package uy.edu.ctc.sgapp.entidad;
 import java.io.Serializable;
 import java.util.Date;
 
+import uy.edu.ctc.sgapp.utiles.Utilidades;
+
 /**
  *
  * @author alvar
@@ -96,6 +98,56 @@ public class Evaluacion implements Serializable {
 
     public void setObjFchMod(Date objFchMod) {
         ObjFchMod = objFchMod;
+    }
+
+    public String getEstudioNombre()
+    {
+        if(this.getCurEvl() != null)
+        {
+            return this.getCurEvl().getCurNom();
+        }
+
+        if(this.getMatEvl() != null)
+        {
+            return this.getMatEvl().getMatNom();
+        }
+
+        if(this.getModEvl() != null)
+        {
+            return this.getModEvl().getModNom();
+        }
+
+        return "";
+    }
+
+    public String getCarreraCursoNombre()
+    {
+        if(this.getCurEvl() != null)
+        {
+            return this.getCurEvl().getCurNom();
+        }
+
+        if(this.getMatEvl() != null)
+        {
+            return this.getMatEvl().getPlan().getCarreraPlanNombre();
+        }
+
+        if(this.getModEvl() != null)
+        {
+            return this.getModEvl().getCurso().getCurNom();
+        }
+
+        return "";
+    }
+
+    public void setField(String fieldName, String content) {
+
+        if (fieldName.equals("evlCod")) this.setEvlCod(Long.parseLong(content.trim()));
+        if (fieldName.equals("evlDsc")) this.setEvlDsc(content.trim());
+        if (fieldName.equals("evlNom")) this.setEvlNom(content.trim());
+        if (fieldName.equals("evlNotTot")) this.setEvlNotTot(Double.valueOf(content.trim()));
+        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

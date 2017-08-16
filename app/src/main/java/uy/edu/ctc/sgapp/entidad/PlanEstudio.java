@@ -89,6 +89,10 @@ public class PlanEstudio implements Serializable {
         this.lstMateria = lstMateria;
     }
 
+    public String getCarreraPlanNombre()
+    {
+        return this.getCarrera().getCarNom() + " - " + this.getPlaEstNom();
+    }
 
     @Override
     public boolean equals(Object o) {

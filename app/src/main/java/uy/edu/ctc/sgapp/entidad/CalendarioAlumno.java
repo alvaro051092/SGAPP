@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import uy.edu.ctc.sgapp.enumerado.EstadoCalendarioEvaluacion;
+import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 
 /**
