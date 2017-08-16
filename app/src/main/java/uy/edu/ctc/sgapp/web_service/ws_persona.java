@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
+import uy.edu.ctc.sgapp.enumerado.ServicioWeb;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.user_interface.login;
@@ -327,7 +328,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
         Log.e("RESULTADO", persona.getPerUsrMod());
         Log.e("RESULTADO", persona.getPerPass());
 
-        request.addProperty("token", "token");
+        request.addProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN));
         request.addProperty("pUser", usuario);
         request.addProperty("pPassword", password);
 
@@ -386,7 +387,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             e.printStackTrace();
         }
 
-        request.addProperty("token", "token");
+        request.addProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN));
         request.addProperty("pPerCod", PerCod);
 
         envelope.setOutputSoapObject(request);

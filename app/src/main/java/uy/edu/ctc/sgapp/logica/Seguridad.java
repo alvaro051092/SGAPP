@@ -14,6 +14,9 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import android.util.Base64;
 
+import uy.edu.ctc.sgapp.enumerado.Constantes;
+import uy.edu.ctc.sgapp.enumerado.ServicioWeb;
+
 public class Seguridad {
 
     private static Seguridad instancia;
@@ -64,11 +67,8 @@ public class Seguridad {
 
     public String crypt(String text) throws Exception {
 
-        String initialVectorString      = "a#!?d./*@@^^''_a";
-        String secretKey                = "-KeY!!AD#AM!!KeY";
-
-        SecretKeySpec skeySpec          = new SecretKeySpec(secretKey.getBytes(), "AES");
-        IvParameterSpec initialVector   = new IvParameterSpec(initialVectorString.getBytes());
+        SecretKeySpec skeySpec          = new SecretKeySpec(Constantes.ENCRYPT_SEMILLA.getValor().getBytes(), "AES");
+        IvParameterSpec initialVector   = new IvParameterSpec(Constantes.ENCRYPT_VECTOR_INICIO.getValor().getBytes());
 
         if(text == null || text.length() == 0)
             throw new Exception("Empty string");
@@ -153,6 +153,28 @@ public class Seguridad {
         return null;
 
 
+    }
+
+    public String getTokenWS(ServicioWeb servicioWeb){
+
+        String token = "INVALIDO";
+
+        String wsUsr = Constantes.WS_USR_APP.getValor();
+        String wsPsw = Constantes.WS_PSW_APP.getValor();
+
+        try {
+            wsUsr = this.crypt(wsUsr);
+            wsPsw = this.crypt(wsPsw);
+
+            token = wsUsr + Constantes.SEPARADOR.getValor() + wsPsw;
+
+            token = this.crypt(token);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return token;
     }
 
 }
