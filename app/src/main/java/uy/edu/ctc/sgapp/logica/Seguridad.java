@@ -160,7 +160,7 @@ public class Seguridad {
         String token = "INVALIDO";
 
         String wsUsr = Constantes.WS_USR_APP.getValor();
-        String wsPsw = Constantes.WS_PSW_APP.getValor();
+        String wsPsw = this.cryptWithMD5(Constantes.WS_PSW_APP.getValor());
 
         try {
             wsUsr = this.crypt(wsUsr);
