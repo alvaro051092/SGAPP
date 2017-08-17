@@ -2,4 +2,19 @@
     <string name="app_name">SGAPP</string>
     <string name="Usuario">Usuario</string>
     <string name="Password">Contraseña</string>
+    <string name="Inscribir">Inscribir</string>
+    <string name="Borrar">Borrar</string>
+    <string name="INSCRIPCION">INSCRIPCIÓN</string>
+    <string name="EVALUACION">Evaluación:</string>
+    <string name="CURSO_CARRERA">Carrera/Curso:</string>
+    <string name="FECHADESDE">Inscripción Desde:</string>
+    <string name="FECHAHASTA">Inscripción Hasta:</string>
+    <string name="FECHA_EXAMEN">Fecha de Examen:</string>
+
+
+    <string name="xxxxx">xxxxx</string>
+    <string name="xxxxxx">xxxxxxx</string>
+    <string name="xxxxxxx">xxxxxxxx</string>
+
+
 </resources>

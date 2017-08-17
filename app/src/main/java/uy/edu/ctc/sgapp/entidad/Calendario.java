@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import uy.edu.ctc.sgapp.enumerado.Filial;
+import uy.edu.ctc.sgapp.utiles.Utilidades;
+
 /**
  *
  * @author alvar
@@ -90,6 +93,16 @@ public class Calendario implements Serializable {
 
     public void setLstDocentes(List<CalendarioDocente> lstDocentes) {
         this.lstDocentes = lstDocentes;
+    }
+
+    public void setField(String fieldName, String content) {
+
+        if (fieldName.equals("calCod")) this.setCalCod(Long.parseLong(content.trim()));
+        if (fieldName.equals("calFch")) this.setCalFch(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("evlInsFchDsd")) this.setEvlInsFchDsd(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("evlInsFchHst")) this.setEvlInsFchHst(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

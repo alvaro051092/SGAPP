@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/txt_Curso_Carrera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/CURSO_CARRERA" />
+
+    <TextView
+        android:id="@+id/txt_evaluacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/EVALUACION" />
+
+    <TextView
+        android:id="@+id/txt_fechaE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FECHA_EXAMEN" />
+
+    <TextView
+        android:id="@+id/txt_fechaH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FECHAHASTA" />
+
+    <TextView
+        android:id="@+id/txt_fechaD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/FECHADESDE" />
+
+</LinearLayout>
