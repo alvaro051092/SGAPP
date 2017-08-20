@@ -28,7 +28,7 @@ import uy.edu.ctc.sgapp.web_service.ws_evaluacionalumno;
 
 public class Tab_Borrado extends Fragment {
 
-    private ListView listEvalParaInscribirse;
+    private ListView listEvalParaBorrarse;
     private EvaluacionesAdapter evaAdapter;
 
     Persona per;
@@ -42,35 +42,34 @@ public class Tab_Borrado extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.activity_tab_inscribir, container, false);
+        View rootView = inflater.inflate(R.layout.activity_tab_borrado, container, false);
 
         final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
 
         cargarDatos();
 
-        listEvalParaInscribirse = (ListView) rootView.findViewById(R.id.listEvalParaInscribirse);
+        listEvalParaBorrarse = (ListView) rootView.findViewById(R.id.listEvalParaBorrarse);
 
         cargarEvaluaciones();
 
-        listEvalParaInscribirse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listEvalParaBorrarse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                obj = listEvalParaInscribirse.getItemAtPosition(i);
+                obj = listEvalParaBorrarse.getItemAtPosition(i);
 
                 dialog.setMessage("¿Desea Borrarse su inscripcion?");
                 dialog.setCancelable(false);
-                dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener(){
+                dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
 
-                        EliminarInscripcion(obj);
+                    EliminarInscripcion(obj);
 
                     }
                 });
                 dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int i)
-                    {
+                    public void onClick(DialogInterface dialog, int i) {
                     }
                 });
                 dialog.show();
@@ -108,12 +107,12 @@ public class Tab_Borrado extends Fragment {
         {
             System.out.println("No esta inscripto a ninguna Evaluacion" + TipoMensaje.ERROR);
             evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>());
-            if(listEvalParaInscribirse != null) listEvalParaInscribirse.setAdapter(evaAdapter);
+            if(listEvalParaBorrarse != null) listEvalParaBorrarse.setAdapter(evaAdapter);
         }
         else
         {
             evaAdapter = new EvaluacionesAdapter(getContext(), retorno.getLstObjetos());
-            if(listEvalParaInscribirse != null) listEvalParaInscribirse.setAdapter(evaAdapter);
+            if(listEvalParaBorrarse != null) listEvalParaBorrarse.setAdapter(evaAdapter);
         }
     }
 

@@ -47,10 +47,8 @@ public class menu_lateral extends AppCompatActivity {
         acBar.setDisplayHomeAsUpEnabled(true);
 
         listMenuLateral = (ListView) findViewById(R.id.menuLateral);
-        //-------------------------------------------------
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         miLayout = (LinearLayout) findViewById(R.id.miLayout);
-        //-------------------------------------------------
 
         cargarMenu();
 
@@ -108,22 +106,27 @@ public class menu_lateral extends AppCompatActivity {
             case 1:
                 Intent a = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(a);
+                drawerLayout.closeDrawer(listMenuLateral);
                 break;
             case 2:
                 Intent b = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(b);
+                drawerLayout.closeDrawer(listMenuLateral);
                 break;
             case 3:
                 Intent c = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(c);
+                drawerLayout.closeDrawer(listMenuLateral);
                 break;
             case 4:
                 Intent d = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(d);
+                drawerLayout.closeDrawer(listMenuLateral);
                 break;
             case 5:
                 Intent e = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(e);
+                drawerLayout.closeDrawer(listMenuLateral);
                 break;
         }
     }
