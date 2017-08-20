@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         btnAlfredo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Alfredo.class);
+                Intent intent = new Intent(MainActivity.this, menu_lateral.class);
                 startActivity(intent);
             }
         });
