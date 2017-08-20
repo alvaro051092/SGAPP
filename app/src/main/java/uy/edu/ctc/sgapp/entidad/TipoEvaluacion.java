@@ -65,13 +65,12 @@ import uy.edu.ctc.sgapp.utiles.Utilidades;
 
     public void setField(String fieldName, String content) {
 
-//        System.out.println("CONTEXTOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!!!!!!!!!: "+ content);
-
         if (fieldName.equals("tpoEvlCod")) this.setTpoEvlCod(Long.parseLong(content.trim()));
         if (fieldName.equals("tpoEvlExm")) this.setTpoEvlExm(Boolean.parseBoolean(content.trim()));
         if (fieldName.equals("tpoEvlinsAut")) this.setTpoEvlInsAut(Boolean.parseBoolean(content.trim()));
         if (fieldName.equals("tpoEvlNom")) this.setTpoEvlNom(content.trim());
         if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

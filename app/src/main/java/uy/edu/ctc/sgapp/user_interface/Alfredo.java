@@ -43,7 +43,7 @@ public class Alfredo extends AppCompatActivity {
 //                calAlumno.setAlumno(per);
 //
 //                loEvaluacion.getInstancia(getApplicationContext()).EvaluacionesParaInscripcion(calAlumno);
-                Intent intent = new Intent(Alfredo.this, lstEvaluacionInscripcionAlumno.class);
+                Intent intent = new Intent(Alfredo.this, lstEvaluacionInscripcionAlumnos.class);
                 startActivity(intent);
 
             }
@@ -53,17 +53,19 @@ public class Alfredo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                long AluPerCod = 3;
-
-                Persona per = new Persona();
-                per.setPerCod(AluPerCod);
-
-                CalendarioAlumno calAlumno = new CalendarioAlumno();
-
-                calAlumno.setAlumno(per);
+//                long AluPerCod = 3;
+//
+//                Persona per = new Persona();
+//                per.setPerCod(AluPerCod);
+//
+//                CalendarioAlumno calAlumno = new CalendarioAlumno();
+//
+//                calAlumno.setAlumno(per);
 
 //                loEvaluacion.getInstancia(getApplicationContext()).lstPorAlumno(calAlumno);
 
+//                Intent intent = new Intent(Alfredo.this, lstEvaluacionInscripcionAlumno.class);
+//                startActivity(intent);
             }
         });
 

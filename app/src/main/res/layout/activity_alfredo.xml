@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Pruebas Alfredo"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +21,7 @@
     <Button
         android:id="@+id/btn_LstEvaluacionXAlumno"
         android:text="Evaluaciones por Alumno"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/btn_lstXAlumno"
         android:text="Lista por Alumno"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -44,7 +44,7 @@
     <Button
         android:id="@+id/btn_LstPendientes"
         android:text="Listar Pendientes"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -55,7 +55,7 @@
     <Button
         android:id="@+id/btn_Inscribir"
         android:text="Inscribir"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -67,7 +67,7 @@
     <Button
         android:id="@+id/btn_desinscribir"
         android:text="Desinscribir"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

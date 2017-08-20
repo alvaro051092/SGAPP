@@ -51,13 +51,16 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
 
     protected Boolean doInBackground(String... strings) {
-
         boolean resul = true;
 
         switch(this.metodo)
         {
+            case GET_EVALUACIONESPARABORRAR:
+                resul = this.EvaluacionesParaInscripcion("NO");
+                metodoToCall = "EvaluacionesParaInscripcion";
+                break;
             case GET_EVALUACIONESPARAINSCRIPCION:
-                resul = this.EvaluacionesParaInscripcion();
+                resul = this.EvaluacionesParaInscripcion("SI");
                 metodoToCall = "EvaluacionesParaInscripcion";
                 break;
             case GET_EVALUACIONESFINALIZADAS:
@@ -74,7 +77,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
                 break;
             case DESINSCRIBIRALUMNO:
                 resul = this.DesinscribirAlumno();
-                metodoToCall = "RetornoDesinscribirAlumno";
+                metodoToCall = "DesinscribirAlumno";
                 break;
         }
         return resul;
@@ -83,8 +86,9 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
     protected void onPostExecute(Boolean result){
         if (result)
         {
-            if(retorno.getMensaje() != null) Log.e("RESULTADO: ", retorno.getMensaje().getMensaje());
+            if(retorno.getMensaje().getTipoMensaje() != null) Log.e("RESULTADO: ", retorno.getMensaje().getMensaje());
             if(!retorno.SurgioErrorListaRequerida()) Log.e("RESULTADO: ", retorno.getLstObjetos().toString());
+
 
             if(clase != null && metodoToCall != null)
             {
@@ -110,16 +114,18 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
         }
     }
 
-    public boolean EvaluacionesParaInscripcion(){
-        retorno                         = new Retorno_MsgObj();
-        boolean resul                   = true;
-        List<Object> lstObj             = new ArrayList<>();
-        Calendario calendario           = new Calendario();
-        Evaluacion evaluacion           = new Evaluacion();
-        TipoEvaluacion tpoevaluacion    = new TipoEvaluacion();
-        Materia materia                 = new Materia();
-        Curso curso                     = new Curso();
-        Modulo modulo                   = new Modulo();
+    public boolean EvaluacionesParaInscripcion(String AlIns){
+        retorno                             = new Retorno_MsgObj();
+        boolean resul                       = true;
+        List<Object> lstObj                 = new ArrayList<>();
+        Calendario calendario               = new Calendario();
+        Evaluacion evaluacion               = new Evaluacion();
+        TipoEvaluacion tpoevaluacion        = new TipoEvaluacion();
+        Materia materia                     = new Materia();
+        Curso curso                         = new Curso();
+        Modulo modulo                       = new Modulo();
+        Persona persona                     = new Persona();
+        CalendarioAlumno calendarioAlumno   = new CalendarioAlumno();
 
         SoapObject request = new SoapObject(WS_EvaluacionAlumno.servicio.NAMESPACE, WS_EvaluacionAlumno.EvaluacionesPorAlumno.METHOD_NAME);
 
@@ -131,6 +137,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         request.addProperty("token", "pedritoelescamoso");
         request.addProperty("AluPerCod", AluPerCod);
+        request.addProperty("AlIns", AlIns);
 
         envelope.setOutputSoapObject(request);
 
@@ -173,11 +180,11 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
                             ic_eva.getPropertyInfo(g, pi_eva);
 
                             String objetoPadre_eva = pi_eva.name;
-
 //                            Log.e("Pi.NAME G: ", objetoPadre_eva.toString());
 //                            Log.e("IC G: ", ic_eva.getProperty(g).toString());
 
                             evaluacion.setField(objetoPadre_eva, ic_eva.getProperty(g).toString());
+                            calendario.setEvaluacion(evaluacion);
 
                             if(objetoPadre_eva.equals("tpoEvl"))
                             {
@@ -193,6 +200,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 //                                    Log.e("IC H: ", ic_tpo.getProperty(h).toString());
 
                                     tpoevaluacion.setField(objetoPadre_tpo, ic_tpo.getProperty(h).toString());
+                                    calendario.getEvaluacion().setTipoEvaluacion(tpoevaluacion);
                                 }
                             }
                             if(objetoPadre_eva.equals("matEvl"))
@@ -209,49 +217,92 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 //                                    Log.e("IC J: ", ic_mat.getProperty(j).toString());
 
                                     materia.setField(objetoPadre_mat, ic_mat.getProperty(j).toString());
+                                    calendario.getEvaluacion().setMatEvl(materia);
                                 }
                             }
-//                            if(objetoPadre_eva.equals("modEvl"))
-//                            {
-//                                SoapObject ic_mod = (SoapObject) ic_eva.getProperty(g);
-//
-//                                for(int k = 0; k < ic_mod.getPropertyCount(); k++)
-//                                {
-//                                    PropertyInfo pi_mod = new PropertyInfo();
-//                                    ic_mod.getPropertyInfo(k, pi_mod);
-//
-//                                    String objetoPadre_mod = pi_mod.name;
-////                                    Log.e("Pi.NAME K: ", objetoPadre_mod.toString());
-////                                    Log.e("IC K: ", ic_mod.getProperty(k).toString());
-//
-////                                    modulo.setField(objetoPadre_mod, ic_mod.getProperty(k).toString());
-//                                }
-//                            }
-//                            if(objetoPadre_eva.equals("curEvl"))
-//                            {
-//                                SoapObject ic_cur = (SoapObject) ic_eva.getProperty(g);
-//
-//                                for(int l = 0; l < ic_cur.getPropertyCount(); l++)
-//                                {
-//                                    PropertyInfo pi_cur = new PropertyInfo();
-//                                    ic_cur.getPropertyInfo(l, pi_cur);
-//
-//                                    String objetoPadre_cur = pi_cur.name;
-////                                    Log.e("Pi.NAME L: ", objetoPadre_cur.toString());
-////                                    Log.e("IC L: ", ic_cur.getProperty(l).toString());
-//
-////                                    curso.setField(objetoPadre_cur, ic_cur.getProperty(l).toString());
-//                                }
-//                            }
+                            if(objetoPadre_eva.equals("modEvl"))
+                            {
+                                SoapObject ic_mod = (SoapObject) ic_eva.getProperty(g);
+
+                                for(int k = 0; k < ic_mod.getPropertyCount(); k++)
+                                {
+                                    PropertyInfo pi_mod = new PropertyInfo();
+                                    ic_mod.getPropertyInfo(k, pi_mod);
+
+                                    String objetoPadre_mod = pi_mod.name;
+                                    Log.e("Pi.NAME K: ", objetoPadre_mod.toString());
+                                    Log.e("IC K: ", ic_mod.getProperty(k).toString());
+
+//                                    modulo.setField(objetoPadre_mod, ic_mod.getProperty(k).toString());
+                                    calendario.getEvaluacion().setModEvl(modulo);
+                                }
+                            }
+                            if(objetoPadre_eva.equals("curEvl"))
+                            {
+                                SoapObject ic_cur = (SoapObject) ic_eva.getProperty(g);
+
+                                for(int l = 0; l < ic_cur.getPropertyCount(); l++)
+                                {
+                                    PropertyInfo pi_cur = new PropertyInfo();
+                                    ic_cur.getPropertyInfo(l, pi_cur);
+
+                                    String objetoPadre_cur = pi_cur.name;
+                                    Log.e("Pi.NAME L: ", objetoPadre_cur.toString());
+                                    Log.e("IC L: ", ic_cur.getProperty(l).toString());
+
+//                                    curso.setField(objetoPadre_cur, ic_cur.getProperty(l).toString());
+                                    calendario.getEvaluacion().setCurEvl(curso);
+                                }
+                            }
+                        }
+                    }
+
+                    if(objetoPadre_cal.equals("lstAlumnos"))
+                    {
+                        SoapObject ic_al = (SoapObject) ic_cal.getProperty(f);
+
+                        for(int a = 0; a < ic_al.getPropertyCount(); a++)
+                        {
+                            PropertyInfo pi_al = new PropertyInfo();
+                            ic_al.getPropertyInfo(a, pi_al);
+
+                            String objetoPadre_al = pi_al.name;
+//                            Log.e("Pi.NAME A: ", objetoPadre_al.toString());
+//                            Log.e("IC A: ", ic_al.getProperty(a).toString());
+
+                            calendarioAlumno.setField(objetoPadre_al, ic_al.getProperty(a).toString());
+
+                            if(objetoPadre_al.equals("alumno"))
+                            {
+                                SoapObject ic_alu = (SoapObject) ic_al.getProperty(a);
+
+                                for(int b = 0; b < ic_alu.getPropertyCount(); b++)
+                                {
+                                    PropertyInfo pi_alu = new PropertyInfo();
+                                    ic_alu.getPropertyInfo(b, pi_alu);
+
+                                    String objetoPadre_alu = pi_alu.name;
+//                            Log.e("Pi.NAME B: ", objetoPadre_alu.toString());
+//                            Log.e("IC B: ", ic_alu.getProperty(b).toString());
+
+                                    persona.setField(objetoPadre_alu, ic_alu.getProperty(b).toString());
+                                    calendarioAlumno.setAlumno(persona);
+                                    List<CalendarioAlumno> lstcalAl = new ArrayList();
+                                    lstcalAl.add(calendarioAlumno);
+                                    calendario.setLstAlumnos(lstcalAl);
+                                }
+                            }
                         }
                     }
                 }
             }
-            calendario.setEvaluacion(evaluacion);
-            calendario.getEvaluacion().setTipoEvaluacion(tpoevaluacion);
-            calendario.getEvaluacion().setMatEvl(materia);
-//            calendario.getEvaluacion().setCurEvl(curso);
-//            calendario.getEvaluacion().setModEvl(modulo);
+
+//            calendario.setEvaluacion(evaluacion);
+//            calendario.getEvaluacion().setTipoEvaluacion(tpoevaluacion);
+//            if(materia.getMatCod() != null) calendario.getEvaluacion().setMatEvl(materia);
+//            if(curso.getCurCod() != null) calendario.getEvaluacion().setCurEvl(curso);
+//            if(modulo.getModCod() != null) calendario.getEvaluacion().setModEvl(modulo);
+//            if(calendarioAlumno.getCalAlCod() != null && AlIns.equals("NO")) calendario.getLstAlumnos().add(calendarioAlumno);
             lstObj.add(calendario);
         }
         catch (Exception e)
@@ -429,7 +480,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         CalendarioAlumno calAlumno = (CalendarioAlumno) parametro.getObjeto();
 
-        long CalAlCod  = calAlumno.getCalAlCod();
+        long CalAlCod   = calAlumno.getCalAlCod();
         long CalCod     = calAlumno.getCalendario().getCalCod();
 
         request.addProperty("token", "pedritoelescamoso");
@@ -474,5 +525,5 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
             resul = false;
         }
         return resul;
-    }
+    } // OK
 }

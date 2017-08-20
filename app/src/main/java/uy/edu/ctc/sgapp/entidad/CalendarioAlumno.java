@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import uy.edu.ctc.sgapp.enumerado.EstadoCalendarioEvaluacion;
+import uy.edu.ctc.sgapp.enumerado.TipoAprobacion;
+import uy.edu.ctc.sgapp.enumerado.TipoPeriodo;
 import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 
@@ -130,6 +132,15 @@ public class CalendarioAlumno implements Serializable {
 
     public void setEvlValPor(Persona evlValPor) {
         EvlValPor = evlValPor;
+    }
+
+    public void setField(String fieldName, String content) {
+
+        if (fieldName.equals("calAlCod")) this.setCalAlCod(Long.parseLong(content.trim()));
+        if (fieldName.equals("evlCalEst")) this.setEvlCalEst(EstadoCalendarioEvaluacion.valueOf(content.trim()));
+        if (fieldName.equals("evlCalFch")) this.setEvlCalFch(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

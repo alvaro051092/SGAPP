@@ -32,7 +32,11 @@
         <activity android:name=".user_interface.Alvaro" />
         <activity android:name=".user_interface.Alfredo" />
         <activity android:name=".user_interface.login" />
-        <activity android:name=".user_interface.lstEvaluacionInscripcionAlumno" />
+        <activity
+            android:name=".user_interface.lstEvaluacionInscripcionAlumnos"
+            android:label="@string/title_activity_lst_evaluaciones_ingreso_alumnos"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".user_interface.Tab_Borrados" />
     </application>
 
 </manifest>

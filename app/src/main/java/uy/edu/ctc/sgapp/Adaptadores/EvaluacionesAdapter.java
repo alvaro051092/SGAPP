@@ -22,12 +22,11 @@ import uy.edu.ctc.sgapp.entidad.Calendario;
  */
 
 public class EvaluacionesAdapter extends BaseAdapter{
-//    SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
 
     private Context context;
-    private ArrayList<Object> lstObjeto;
+    private List<Object> lstObjeto;
 
-    public EvaluacionesAdapter(Context context, ArrayList<Object> objeto)
+    public EvaluacionesAdapter(Context context, List<Object> objeto)
     {
         this.context = context;
         this.lstObjeto = objeto;
@@ -66,20 +65,13 @@ public class EvaluacionesAdapter extends BaseAdapter{
         TextView fechaH = (TextView) view.findViewById(R.id.txt_fechaH);
         TextView fechaE = (TextView) view.findViewById(R.id.txt_fechaE);
 
-        System.out.println("LSTOBJETOOO!!! " + lstObjeto);
+        final Calendario cal     = (Calendario) getItem(posicion);
 
-        for(Object obj : lstObjeto)
-        {
-            List<Calendario> lstCal = (ArrayList<Calendario>) obj;
-            for (Calendario cal : lstCal)
-            {
-                Curso_Carrera.setText("Carrera / Curso: " + String.valueOf(cal.getEvaluacion().getEstudioNombre()));
-                evaluacion.setText("Evaluación: " + cal.getEvaluacion().getEvlNom());
-                fechaD.setText("Fecha Desde: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getEvlInsFchDsd()));
-                fechaH.setText("Fecha Hasta: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getEvlInsFchHst()));
-                fechaE.setText("Fecha Evaluacion: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getCalFch()));
-            }
-        }
+        Curso_Carrera.setText("Carrera / Curso: " + String.valueOf(cal.getEvaluacion().getEstudioNombre()));
+        evaluacion.setText("Evaluación: " + cal.getEvaluacion().getEvlNom());
+        fechaD.setText("Fecha Desde: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getEvlInsFchDsd()));
+        fechaH.setText("Fecha Hasta: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getEvlInsFchHst()));
+        fechaE.setText("Fecha Evaluacion: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getCalFch()));
 
         return view;
     }

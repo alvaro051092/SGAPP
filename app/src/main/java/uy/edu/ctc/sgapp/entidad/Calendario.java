@@ -105,6 +105,18 @@ public class Calendario implements Serializable {
 
     }
 
+    public Boolean existeAlumno(Long PerCod){
+        for(CalendarioAlumno calAlumno : this.lstAlumnos)
+        {
+            if(calAlumno.getAlumno().getPerCod().equals(PerCod))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import uy.edu.ctc.sgapp.enumerado.TipoAprobacion;
 import uy.edu.ctc.sgapp.enumerado.TipoPeriodo;
+import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 
 /**
@@ -110,6 +112,18 @@ public class Modulo implements Serializable {
     public void setLstEvaluacion(List<Evaluacion> lstEvaluacion) {
         this.lstEvaluacion = lstEvaluacion;
     }
+
+//    public void setField(String fieldName, String content) {
+//
+//        if (fieldName.equals("matCod")) this.setMatCod(Long.parseLong(content.trim()));
+//        if (fieldName.equals("matCntHor")) this.setMatCntHor(Double.valueOf(content.trim()));
+//        if (fieldName.equals("matNom")) this.setMatNom(content.trim());
+//        if (fieldName.equals("matTpoApr")) this.setMatTpoApr(TipoAprobacion.valueOf(content.trim()));
+//        if (fieldName.equals("matTpoPer")) this.setMatTpoPer(TipoPeriodo.valueOf(content.trim()));
+//        if (fieldName.equals("matPerVal")) this.setMatPerVal(Double.valueOf(content.trim()));
+//        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+//
+//    }
 
     @Override
     public boolean equals(Object o) {
