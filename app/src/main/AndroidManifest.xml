@@ -36,7 +36,6 @@
             android:name=".user_interface.lstEvaluacionInscripcionAlumnos"
             android:label="@string/title_activity_lst_evaluaciones_ingreso_alumnos"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".user_interface.Tab_Borrado" />
         <activity android:name=".user_interface.menu_lateral"></activity>
     </application>
 
