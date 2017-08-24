@@ -3,15 +3,20 @@ package uy.edu.ctc.sgapp.web_service;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.kxml2.kdom.Element;
+import org.kxml2.kdom.Node;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
@@ -126,7 +131,14 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
-            transporte.call(WS_Persona.ObtenerPersonaByCod.SOAP_ACTION, envelope);
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+
+            //------------------------------------------------------------------------------------------
+
+            transporte.call(WS_Persona.ObtenerPersonaByCod.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -193,7 +205,14 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
-            transporte.call(WS_Persona.ObtenerPersonaByUser.SOAP_ACTION, envelope);
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+
+            //------------------------------------------------------------------------------------------
+
+            transporte.call(WS_Persona.ObtenerPersonaByUser.SOAP_ACTION, envelope, headerList);
 
             //SoapPrimitive resSoap =(SoapPrimitive)envelope.getResponse();
 
@@ -263,7 +282,14 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
-            transporte.call(WS_Persona.PersonaActualizarToken.SOAP_ACTION, envelope);
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+
+            //------------------------------------------------------------------------------------------
+
+            transporte.call(WS_Persona.PersonaActualizarToken.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -338,7 +364,14 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
-            transporte.call(WS_Login.Login.SOAP_ACTION, envelope);
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+
+            //------------------------------------------------------------------------------------------
+
+            transporte.call(WS_Login.Login.SOAP_ACTION, envelope, headerList);
 
             SoapPrimitive resSoap =(SoapPrimitive) envelope.getResponse();
 
@@ -376,8 +409,8 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         SoapObject request = new SoapObject(WS_Login.servicio.NAMESPACE, WS_Login.Logout.METHOD_NAME);
 
-        SoapSerializationEnvelope envelope =
-                new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        envelope.dotNet = false;
 
         String PerCod = "";
 
@@ -387,16 +420,23 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             e.printStackTrace();
         }
 
-        request.addProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN));
+        //request.addProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN));
         request.addProperty("pPerCod", PerCod);
 
         envelope.setOutputSoapObject(request);
+
+        //------------------------------------------------------------------------------------------
+
+        List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+        headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+
+        //------------------------------------------------------------------------------------------
 
         HttpTransportSE transporte = new HttpTransportSE(WS_Login.servicio.URL);
 
         try
         {
-            transporte.call(WS_Login.Logout.SOAP_ACTION, envelope);
+            transporte.call(WS_Login.Logout.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
