@@ -114,6 +114,21 @@ public class Materia implements Serializable {
         this.lstEvaluacion = lstEvaluacion;
     }
 
+    public boolean MateriaExonera(Double calificacion){
+        boolean puede = false;
+        switch(this.MatTpoApr)
+        {
+            case EXONERABLE_CON_GANANCIA:
+                if(calificacion >= 86) puede =  true;
+                break;
+            case EXONERABLE_SIN_GANANCIA:
+                if(calificacion >= 86) puede =  true;
+                break;
+        }
+
+        return puede;
+    }
+
     public void setField(String fieldName, String content) {
 
         if (fieldName.equals("matCod")) this.setMatCod(Long.parseLong(content.trim()));

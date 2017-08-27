@@ -8,6 +8,10 @@ package uy.edu.ctc.sgapp.entidad;
 import java.io.Serializable;
 import java.util.Date;
 
+import uy.edu.ctc.sgapp.enumerado.TipoAprobacion;
+import uy.edu.ctc.sgapp.enumerado.TipoPeriodo;
+import uy.edu.ctc.sgapp.utiles.Utilidades;
+
 /**
  *
  * @author alvar
@@ -106,6 +110,75 @@ public class Escolaridad implements Serializable {
         ObjFchMod = objFchMod;
     }
 
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("escCalVal"))  this.setEscCalVal(Double.valueOf(content.trim()));
+        if (fieldName.equals("escCod"))     this.setEscCod(Long.valueOf(content.trim()));
+        if (fieldName.equals("escCurVal"))  this.setEscCurVal(Double.valueOf(content.trim()));
+        if (fieldName.equals("escFch"))     this.setEscFch(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("objFchMod"))  this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
+    }
+
+    public String getAprobacion() {
+        if(this.Revalida()) return "Revalida";
+
+        if(this.getMateria() != null) if(this.materia.MateriaExonera(EscCurVal)) return "Exonera";
+
+        if(this.EscCalVal >= 70) return "Aprobado";
+        if(this.EscCalVal < 70) return "Eliminado";
+        return "";
+    }
+
+    public Boolean Revalida(){
+        if(this.EscCalVal == null) return false;
+        return this.EscCalVal.equals(Double.NaN);
+    }
+
+    public String getEstudioNombre()
+    {
+        if(this.getCurso() != null)
+        {
+            return this.getCurso().getCurNom();
+        }
+
+        if(this.getMateria() != null)
+        {
+            return this.getMateria().getMatNom();
+        }
+
+        if(this.getModulo() != null)
+        {
+            return this.getModulo().getModNom();
+        }
+
+        return "";
+    }
+
+    public String getNombreCarreraCurso()
+    {
+        if(this.getMateria() != null)
+        {
+            if(this.getMateria().getPlan() != null)
+            {
+                return this.getMateria().getPlan().getCarreraPlanNombre();
+            }
+        }
+
+        if(this.getCurso() != null) return this.getCurso().getCurNom();
+
+        if(this.getModulo() != null)
+        {
+            if (this.getModulo().getCurso() != null)
+            {
+                return this.getModulo().getCurso().getModuloCursoNombre();
+            }
+        }
+
+        return "";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -114,7 +187,6 @@ public class Escolaridad implements Serializable {
         Escolaridad that = (Escolaridad) o;
 
         return EscCod.equals(that.EscCod);
-
     }
 
     @Override

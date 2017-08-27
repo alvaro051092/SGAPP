@@ -12,6 +12,12 @@
         android:text="@string/CURSO_CARRERA" />
 
     <TextView
+        android:id="@+id/txt_materia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Materia" />
+
+    <TextView
         android:id="@+id/txt_evaluacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,13 +30,13 @@
         android:text="@string/FECHA_EXAMEN" />
 
     <TextView
-        android:id="@+id/txt_fechaH"
+        android:id="@+id/txt_fechaD"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/FECHAHASTA" />
 
     <TextView
-        android:id="@+id/txt_fechaD"
+        android:id="@+id/txt_fechaH"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/FECHADESDE" />
