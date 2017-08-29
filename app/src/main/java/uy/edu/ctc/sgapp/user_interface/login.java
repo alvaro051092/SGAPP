@@ -109,7 +109,7 @@ public class login extends AppCompatActivity {
         Retorno_MsgObj parametro    = new Retorno_MsgObj();
         parametro.setObjeto(persona);
 
-        ws_persona_rest wsPersona = new ws_persona_rest(this, PersonaServicioMetodo.LOGIN, parametro);
+        ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.LOGIN, parametro);
         wsPersona.execute();
     }
 
