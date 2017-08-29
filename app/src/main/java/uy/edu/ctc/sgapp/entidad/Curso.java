@@ -102,17 +102,22 @@ public class Curso implements Serializable {
         this.lstEvaluacion = lstEvaluacion;
     }
 
-//    public void setField(String fieldName, String content) {
-//
-//        if (fieldName.equals("matCod")) this.setMatCod(Long.parseLong(content.trim()));
-//        if (fieldName.equals("matCntHor")) this.setMatCntHor(Double.valueOf(content.trim()));
-//        if (fieldName.equals("matNom")) this.setMatNom(content.trim());
-//        if (fieldName.equals("matTpoApr")) this.setMatTpoApr(TipoAprobacion.valueOf(content.trim()));
-//        if (fieldName.equals("matTpoPer")) this.setMatTpoPer(TipoPeriodo.valueOf(content.trim()));
-//        if (fieldName.equals("matPerVal")) this.setMatPerVal(Double.valueOf(content.trim()));
-//        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
-//
-//    }
+    public String getModuloCursoNombre()
+    {
+        return this.getCurNom();
+    }
+
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("curCod")) this.setCurCod(Long.parseLong(content.trim()));
+        if (fieldName.equals("curCrt")) this.setCurCrt(content.trim());
+        if (fieldName.equals("curDsc")) this.setCurDsc(content.trim());
+        if (fieldName.equals("curFac")) this.setCurFac(content.trim());
+        if (fieldName.equals("curNom")) this.setCurNom(content.trim());
+        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
+    }
 
     @Override
     public boolean equals(Object o) {

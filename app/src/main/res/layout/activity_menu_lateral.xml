@@ -12,19 +12,17 @@ tools:context=".user_interface.menu_lateral">
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
+        <ListView
+            android:id="@+id/listEvaluaciones"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:layout_marginLeft="20dp"
-            android:text="HOLA MUNDO" />
+            android:layout_height="match_parent" />
+
     </LinearLayout>
 
 <!-- Menu Lateral -->
     <ListView
         android:id="@+id/menuLateral"
-        android:layout_width="200dp"
+        android:layout_width="280dp"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:layout_gravity="start"

@@ -93,6 +93,7 @@ public class Tab_Inscribir extends Fragment {
 
         cal.setCalCod(CalCod);
         calAlumno.setAlumno(per);
+
         calAlumno.setCalendario(cal);
 
         parametro = new Retorno_MsgObj();
@@ -138,15 +139,8 @@ public class Tab_Inscribir extends Fragment {
 
     public void cargarEvaluaciones()
     {
-        per = new Persona();
-        calAlumno = new CalendarioAlumno();
         if(loPersona.getInstancia(getContext()).SesionValida())
         {
-            Long PerCod = loPersona.getInstancia(getContext()).DevolverCodigoPersona();
-
-            per.setPerCod(PerCod);
-            calAlumno.setAlumno(per);
-
             parametro  = new Retorno_MsgObj();
             parametro.setObjeto(calAlumno);
 
@@ -157,11 +151,17 @@ public class Tab_Inscribir extends Fragment {
 
     public void cargarDatos()
     {
-        calAlumno = new CalendarioAlumno();
+        //Persona
+        Long PerCod = loPersona.getInstancia(getContext()).DevolverCodigoPersona();
+        per = new Persona();
+        per.setPerCod(PerCod);
 
+        //Fecha actual
         fechaActual = new Date();
         sdf = new SimpleDateFormat("yyyyMMdd");
 
+        //Calendario Alumno
+        calAlumno = new CalendarioAlumno();
         calAlumno.setAlumno(per);
     }
 }

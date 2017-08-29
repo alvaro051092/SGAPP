@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import uy.edu.ctc.sgapp.utiles.Utilidades;
+
 /**
  *
  * @author alvar
@@ -87,6 +89,18 @@ public class Carrera implements Serializable {
 
     public void setLstPlanEstudio(List<PlanEstudio> lstPlanEstudio) {
         this.lstPlanEstudio = lstPlanEstudio;
+    }
+
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("carCod"))     this.setCarCod(Long.valueOf(content.trim()));
+        if (fieldName.equals("carCrt"))     this.setCarCrt(content.trim());
+        if (fieldName.equals("carDsc"))     this.setCarDsc(content.trim());
+        if (fieldName.equals("carFac"))     this.setCarFac(content.trim());
+        if (fieldName.equals("carNom"))     this.setCarNom(content.trim());
+        if (fieldName.equals("objFchMod"))  this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

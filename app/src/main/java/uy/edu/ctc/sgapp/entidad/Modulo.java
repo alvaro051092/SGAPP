@@ -113,17 +113,18 @@ public class Modulo implements Serializable {
         this.lstEvaluacion = lstEvaluacion;
     }
 
-//    public void setField(String fieldName, String content) {
-//
-//        if (fieldName.equals("matCod")) this.setMatCod(Long.parseLong(content.trim()));
-//        if (fieldName.equals("matCntHor")) this.setMatCntHor(Double.valueOf(content.trim()));
-//        if (fieldName.equals("matNom")) this.setMatNom(content.trim());
-//        if (fieldName.equals("matTpoApr")) this.setMatTpoApr(TipoAprobacion.valueOf(content.trim()));
-//        if (fieldName.equals("matTpoPer")) this.setMatTpoPer(TipoPeriodo.valueOf(content.trim()));
-//        if (fieldName.equals("matPerVal")) this.setMatPerVal(Double.valueOf(content.trim()));
-//        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
-//
-//    }
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("modCod")) this.setModCod(Long.parseLong(content.trim()));
+        if (fieldName.equals("modCntHor")) this.setModCntHor(Double.valueOf(content.trim()));
+        if (fieldName.equals("modDsc")) this.setModDsc(content.trim());
+        if (fieldName.equals("modNom")) this.setModNom(content.trim());
+        if (fieldName.equals("modPerVal")) this.setModPerVal(Double.valueOf(content.trim()));
+        if (fieldName.equals("modTpoPer")) this.setModTpoPer(TipoPeriodo.valueOf(content.trim()));
+        if (fieldName.equals("objFchMod")) this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
+    }
 
     @Override
     public boolean equals(Object o) {

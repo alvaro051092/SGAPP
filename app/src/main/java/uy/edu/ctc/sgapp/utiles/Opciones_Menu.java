@@ -21,10 +21,8 @@ public class Opciones_Menu {
         lstmenu = new ArrayList<>();
 
         lstmenu.add(new Menu(1 , "Evaluaciones"));
-        lstmenu.add(new Menu(2 , "Opcion 2"));
-        lstmenu.add(new Menu(3 , "Opcion 3"));
-        lstmenu.add(new Menu(4 , "Opcion 4"));
-        lstmenu.add(new Menu(5 , "Opcion 5"));
+        lstmenu.add(new Menu(2 , "Solicitudes"));
+        lstmenu.add(new Menu(3 , "Escolaridad"));
 
         return lstmenu;
     }

@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import uy.edu.ctc.sgapp.utiles.Utilidades;
+
 /**
  *
  * @author alvar
@@ -92,6 +94,17 @@ public class PlanEstudio implements Serializable {
     public String getCarreraPlanNombre()
     {
         return this.getCarrera().getCarNom() + " - " + this.getPlaEstNom();
+    }
+
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("plaEstCod"))      this.setPlaEstCod(Long.valueOf(content.trim()));
+        if (fieldName.equals("plaEstCreNec"))   this.setPlaEstCreNec(Double.valueOf(content.trim()));
+        if (fieldName.equals("plaEstDsc"))      this.setPlaEstDsc(content.trim());
+        if (fieldName.equals("plaEstNom"))      this.setPlaEstNom(content.trim());
+        if (fieldName.equals("objFchMod"))      this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

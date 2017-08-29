@@ -82,8 +82,6 @@ public class login extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void CerrarSesion(){
