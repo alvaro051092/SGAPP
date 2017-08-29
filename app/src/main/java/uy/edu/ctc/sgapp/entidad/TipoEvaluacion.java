@@ -8,6 +8,7 @@ package uy.edu.ctc.sgapp.entidad;
 import java.io.Serializable;
 import java.util.Date;
 
+
 import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 /**

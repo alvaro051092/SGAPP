@@ -5,6 +5,10 @@
  */
 package uy.edu.ctc.sgapp.utiles;
 
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Root;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +19,16 @@ import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
  *
  * @author alvar
  */
+@Root
 public class Retorno_MsgObj implements Serializable{
 
+    @Element
     private Mensajes mensaje;
+    @ElementList
     private ArrayList<Mensajes> lstMensajes;
+    @Element
     private Object   objeto;
+    @ElementList
     private List<Object> lstObjetos;
     
     public Retorno_MsgObj() {

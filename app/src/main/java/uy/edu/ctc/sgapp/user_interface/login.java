@@ -17,6 +17,7 @@ import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.logica.loPersona;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_persona;
+import uy.edu.ctc.sgapp.web_service.ws_persona_rest;
 
 public class login extends AppCompatActivity {
 
@@ -110,7 +111,7 @@ public class login extends AppCompatActivity {
         Retorno_MsgObj parametro    = new Retorno_MsgObj();
         parametro.setObjeto(persona);
 
-        ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.LOGIN, parametro);
+        ws_persona_rest wsPersona = new ws_persona_rest(this, PersonaServicioMetodo.LOGIN, parametro);
         wsPersona.execute();
     }
 
