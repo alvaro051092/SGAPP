@@ -1,12 +1,7 @@
 package uy.edu.ctc.sgapp.utiles;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.ListIterator;
 
-import uy.edu.ctc.sgapp.entidad.CalendarioAlumno;
 import uy.edu.ctc.sgapp.entidad.Menu;
 
 /**
@@ -23,6 +18,7 @@ public class Opciones_Menu {
         lstmenu.add(new Menu(1 , "Evaluaciones"));
         lstmenu.add(new Menu(2 , "Solicitudes"));
         lstmenu.add(new Menu(3 , "Escolaridad"));
+        lstmenu.add(new Menu(4 , "Cerrar Session"));
 
         return lstmenu;
     }

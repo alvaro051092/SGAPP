@@ -39,7 +39,7 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
 
 
         final String NAMESPACE = "http://WebService/";
-        final String URL="http://192.168.0.100:8084/GestionAcademica/ws_login";
+        final String URL="http://192.168.1.2:8084/GestionAcademica/ws_login";
         final String METHOD_NAME = "Login";
         final String SOAP_ACTION = "http://WebService/ws_login/LoginRequest";
 

@@ -82,17 +82,13 @@ public class Tab_Borrado extends Fragment {
     public void EliminarInscripcion(Object obj)
     {
         parametro = new Retorno_MsgObj();
+        per = new Persona();
         cal = (Calendario) obj;
 
-        long CalAlCod;
+        Long PerCod = loPersona.getInstancia(getContext()).DevolverCodigoPersona();
 
-        for(CalendarioAlumno calAl : cal.getLstAlumnos())
-        {
-            CalAlCod = calAl.getCalAlCod();
-
-            calAlumno.setCalAlCod(CalAlCod);
-        }
-
+        per.setPerCod(PerCod);
+        calAlumno.setAlumno(per);
         calAlumno.setCalendario(cal);
 
         parametro.setObjeto(calAlumno);
@@ -105,7 +101,7 @@ public class Tab_Borrado extends Fragment {
     {
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
-            System.out.println("No esta inscripto a ninguna Evaluacion" + TipoMensaje.ERROR);
+            System.out.println("No esta inscripto a ninguna Evaluacion " + TipoMensaje.ERROR);
             evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>());
             if(listEvalParaBorrarse != null) listEvalParaBorrarse.setAdapter(evaAdapter);
         }

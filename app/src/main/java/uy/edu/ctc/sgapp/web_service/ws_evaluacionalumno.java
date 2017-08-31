@@ -246,7 +246,8 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
         return resul;
     }
 
-    public boolean InscribirAlumno(){
+    public boolean InscribirAlumno()
+    {
         retorno = new Retorno_MsgObj(new Mensajes("Error", TipoMensaje.ERROR));
         boolean resul = true;
 
@@ -310,11 +311,11 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         CalendarioAlumno calAlumno = (CalendarioAlumno) parametro.getObjeto();
 
-        long CalAlCod   = calAlumno.getCalAlCod();
+        long PerCod   = calAlumno.getAlumno().getPerCod();
         long CalCod     = calAlumno.getCalendario().getCalCod();
 
         request.addProperty("token", "pedritoelescamoso");
-        request.addProperty("CalAlCod", CalAlCod);
+        request.addProperty("PerCod", PerCod);
         request.addProperty("CalCod", CalCod);
 
         envelope.setOutputSoapObject(request);

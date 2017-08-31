@@ -105,17 +105,34 @@ public class Calendario implements Serializable {
 
     }
 
-    public Boolean existeAlumno(Long PerCod){
-        for(CalendarioAlumno calAlumno : this.lstAlumnos)
+    public CalendarioAlumno getAlumnoByPersona(Long PerCod){
+
+        CalendarioAlumno pAlumno = new CalendarioAlumno();
+
+        System.out.println("Lista Alumnos: " + this.lstAlumnos);
+
+        for(CalendarioAlumno alumn : this.lstAlumnos)
         {
-            if(calAlumno.getAlumno().getPerCod().equals(PerCod))
+            if(alumn.getAlumno().getPerCod().equals(PerCod))
             {
-                return true;
+                pAlumno = alumn;
+                break;
             }
         }
-
-        return false;
+        return pAlumno;
     }
+
+//    public Boolean existeAlumno(Long PerCod){
+//        for(CalendarioAlumno calAlumno : this.lstAlumnos)
+//        {
+//            if(calAlumno.getAlumno().getPerCod().equals(PerCod))
+//            {
+//                return true;
+//            }
+//        }
+//
+//        return false;
+//    }
 
     @Override
     public boolean equals(Object o) {

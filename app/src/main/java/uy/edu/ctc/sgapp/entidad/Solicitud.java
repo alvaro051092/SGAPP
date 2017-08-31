@@ -10,6 +10,7 @@ import java.util.Date;
 
 import uy.edu.ctc.sgapp.enumerado.EstadoSolicitud;
 import uy.edu.ctc.sgapp.enumerado.TipoSolicitud;
+import uy.edu.ctc.sgapp.utiles.Utilidades;
 
 /**
  *
@@ -98,6 +99,17 @@ public class Solicitud implements Serializable {
 
     public void setObjFchMod(Date objFchMod) {
         ObjFchMod = objFchMod;
+    }
+
+    public void setField(String fieldName, String content)
+    {
+
+        if (fieldName.equals("solCod"))     this.setSolCod(Long.valueOf(content.trim()));
+        if (fieldName.equals("solEst"))     this.setSolEst(EstadoSolicitud.valueOf(content.trim()));
+        if (fieldName.equals("solFchIng"))  this.setSolFchIng(Utilidades.GetInstancia().GetFecha(content.trim()));
+        if (fieldName.equals("solTpo"))     this.setSolTpo(TipoSolicitud.valueOf(content.trim()));
+        if (fieldName.equals("objFchMod"))  this.setObjFchMod(Utilidades.GetInstancia().GetFecha(content.trim()));
+
     }
 
     @Override

@@ -87,14 +87,19 @@ public class Tab_Inscribir extends Fragment {
 
     public void Aceptar(Object obj)
     {
+        calAlumno = new CalendarioAlumno();
+        cal = new Calendario();
+
         cal = (Calendario) obj;
 
-        long CalCod = cal.getCalCod();
+//        long CalCod = cal.getCalCod();
+//        cal.setCalCod(CalCod);
 
-        cal.setCalCod(CalCod);
         calAlumno.setAlumno(per);
-
         calAlumno.setCalendario(cal);
+
+//        System.out.println("CALENDARIO: " + calAlumno.getCalendario().getCalCod());
+//        System.out.println("ALUMNOOOOO: " + calAlumno.getAlumno().getPerCod());
 
         parametro = new Retorno_MsgObj();
         parametro.setObjeto(calAlumno);

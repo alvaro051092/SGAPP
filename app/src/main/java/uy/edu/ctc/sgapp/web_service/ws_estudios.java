@@ -69,7 +69,6 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
     protected void onPostExecute(Boolean result){
         if (result)
         {
-            System.out.println("---------------------");
             if(retorno.getMensaje().getTipoMensaje() != null) Log.e("RESULTADO: ", retorno.getMensaje().getMensaje());
             if(!retorno.SurgioErrorListaRequerida()) Log.e("RESULTADO: ", retorno.getLstObjetos().toString());
 

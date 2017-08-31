@@ -5,6 +5,10 @@
  */
 package uy.edu.ctc.sgapp.enumerado;
 
+import java.util.ArrayList;
+
+import uy.edu.ctc.sgapp.entidad.Menu;
+
 /**
  *
  * @author Alvaro
@@ -43,5 +47,4 @@ public enum TipoSolicitud {
         throw new UnsupportedOperationException(
                 "El tipo de solicitud " + pCod + " is not supported!");
     }
-    
 }

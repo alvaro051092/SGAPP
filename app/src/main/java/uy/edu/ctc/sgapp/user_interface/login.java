@@ -1,8 +1,8 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,13 +17,12 @@ import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.logica.loPersona;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_persona;
-import uy.edu.ctc.sgapp.web_service.ws_persona_rest;
 
 public class login extends AppCompatActivity {
 
     private ProgressBar loading;
     private String usrTexto;
-    private Button btnLogout;
+//    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +33,12 @@ public class login extends AppCompatActivity {
         final EditText usuario      = (EditText) findViewById(R.id.lgn_txt_user);
         final EditText password     = (EditText) findViewById(R.id.lgn_txt_psw);
         Button btnIniciar           = (Button) findViewById(R.id.lgn_btn_iniciar);
-        btnLogout                   = (Button) findViewById(R.id.lgn_btn_logout);
+//        btnLogout                   = (Button) findViewById(R.id.lgn_btn_logout);
 
         if(loPersona.getInstancia(getApplicationContext()).SesionValida())
         {
-            btnLogout.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            btnLogout.setVisibility(View.INVISIBLE);
+            Intent intent = new Intent(this, menu_lateral.class);
+            startActivity(intent);
         }
 
         loading.setVisibility(View.INVISIBLE);
@@ -73,29 +69,12 @@ public class login extends AppCompatActivity {
 
             }
         });
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                CerrarSesion();
-
-            }
-        });
     }
 
-    private void CerrarSesion(){
-        if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
-
-            Persona persona = new Persona();
-            persona.setPerCod(loPersona.getInstancia(getApplicationContext()).DevolverCodigoPersona());
-
-            Retorno_MsgObj parametro = new Retorno_MsgObj();
-            parametro.setObjeto(persona);
-
-            ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.LOGOUT, parametro);
-            wsPersona.execute();
-        }
+    @Override
+    public void onBackPressed ()
+    {
+        moveTaskToBack(true);
     }
 
     private void IniciarSesion(String user, String password){
@@ -126,7 +105,6 @@ public class login extends AppCompatActivity {
 
             ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.GET_PERSONA_USR, parametro);
             wsPersona.execute();
-
         }
         else
         {
@@ -134,31 +112,6 @@ public class login extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
         }
     }
-
-    private void RetornoLogout(Retorno_MsgObj retorno){
-        if(!retorno.SurgioError()){
-
-            loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();
-            loading.setVisibility(View.INVISIBLE);
-            Toast.makeText(getApplicationContext(), "Sesion cerrada correctamente", Toast.LENGTH_SHORT).show();
-
-            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
-            {
-                btnLogout.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                btnLogout.setVisibility(View.INVISIBLE);
-            }
-
-        }
-        else
-        {
-            loading.setVisibility(View.INVISIBLE);
-            Toast.makeText(getApplicationContext(), retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
 
     private void RetornoGetPersona(Retorno_MsgObj retorno){
         if(!retorno.SurgioErrorObjetoRequerido()){
@@ -170,13 +123,17 @@ public class login extends AppCompatActivity {
             persona.setPerAppTkn(FirebaseInstanceId.getInstance().getToken());
             loPersona.getInstancia(getApplicationContext()).ActualizarToken(persona);
 
+            Intent intent = new Intent(this, menu_lateral.class);
+            startActivity(intent);
+
+            //esto se va si el boton se mueve al menu lateral
             if(loPersona.getInstancia(getApplicationContext()).SesionValida())
             {
-                btnLogout.setVisibility(View.VISIBLE);
+//                btnLogout.setVisibility(View.VISIBLE);
             }
             else
             {
-                btnLogout.setVisibility(View.INVISIBLE);
+//                btnLogout.setVisibility(View.INVISIBLE);
             }
 
             loading.setVisibility(View.INVISIBLE);

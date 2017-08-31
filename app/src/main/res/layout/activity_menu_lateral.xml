@@ -5,6 +5,15 @@ android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".user_interface.menu_lateral">
 
+    <!--<menu xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:tools="http://schemas.android.com/tools"-->
+        <!--tools:context=".Main" >-->
+        <!--<item android:id="@+id/action_settings"-->
+            <!--android:title="@string/action_settings"-->
+            <!--android:orderInCategory="100"-->
+            <!--android:showAsAction="never" />-->
+    <!--</menu>-->
+
 <!-- Contenido Principal -->
     <LinearLayout
         android:id="@+id/miLayout"

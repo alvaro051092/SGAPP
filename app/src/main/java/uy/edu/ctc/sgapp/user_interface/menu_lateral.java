@@ -25,12 +25,14 @@ import uy.edu.ctc.sgapp.entidad.Calendario;
 import uy.edu.ctc.sgapp.entidad.CalendarioAlumno;
 import uy.edu.ctc.sgapp.entidad.Menu;
 import uy.edu.ctc.sgapp.entidad.Persona;
+import uy.edu.ctc.sgapp.entidad.Solicitud;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.loPersona;
 import uy.edu.ctc.sgapp.utiles.Opciones_Menu;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_evaluacionalumno;
+import uy.edu.ctc.sgapp.web_service.ws_persona;
 
 import static uy.edu.ctc.sgapp.R.id.listEvalParaInscribirse;
 
@@ -59,8 +61,9 @@ public class menu_lateral extends AppCompatActivity {
         setContentView(R.layout.activity_menu_lateral);
 
         ActionBar acBar = getSupportActionBar();
-        acBar.setHomeButtonEnabled(true);
-        acBar.setDisplayHomeAsUpEnabled(true);
+        acBar.setIcon(R.drawable.burger_icon);
+//        acBar.setHomeButtonEnabled(true);
+//        acBar.setDisplayHomeAsUpEnabled(true);
 
         listEvaluaciones    = (ListView) findViewById(R.id.listEvaluaciones);
         listMenuLateral     = (ListView) findViewById(R.id.menuLateral);
@@ -81,6 +84,12 @@ public class menu_lateral extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed ()
+    {
+        moveTaskToBack(true);
     }
 
     //Evaluaciones Pendientes
@@ -222,16 +231,60 @@ public class menu_lateral extends AppCompatActivity {
                 break;
             //Solicitudes
             case 2:
-                Intent c = new Intent(this, lstEvaluacionInscripcionAlumnos.class);
-                startActivity(c);
+                Intent b = new Intent(this, Solicitudes.class);
+                startActivity(b);
                 drawerLayout.closeDrawer(listMenuLateral);
                 break;
             //Escolaridad
             case 3:
-                Intent d = new Intent(this, escolaridad.class);
-                startActivity(d);
+                Intent c = new Intent(this, escolaridad.class);
+                startActivity(c);
                 drawerLayout.closeDrawer(listMenuLateral);
                 break;
+            //Cerrar Session
+            case 4:
+                CerrarSesion();
+                break;
+        }
+    }
+
+    private void CerrarSesion(){
+        if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
+
+            Persona persona = new Persona();
+            persona.setPerCod(loPersona.getInstancia(getApplicationContext()).DevolverCodigoPersona());
+
+            Retorno_MsgObj parametro = new Retorno_MsgObj();
+            parametro.setObjeto(persona);
+
+            ws_persona wsPersona = new ws_persona(this, PersonaServicioMetodo.LOGOUT, parametro);
+            wsPersona.execute();
+        }
+    }
+
+    private void RetornoLogout(Retorno_MsgObj retorno){
+        if(!retorno.SurgioError()){
+
+            loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();
+//            loading.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), "Sesion cerrada correctamente", Toast.LENGTH_SHORT).show();
+
+            Intent d = new Intent(this, login.class);
+            startActivity(d);
+//            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
+//            {
+////                btnLogout.setVisibility(View.VISIBLE);
+//            }
+//            else
+//            {
+////                btnLogout.setVisibility(View.INVISIBLE);
+//            }
+
+        }
+        else
+        {
+//            loading.setVisibility(View.INVISIBLE);
+            Toast.makeText(getApplicationContext(), retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
         }
     }
 }
