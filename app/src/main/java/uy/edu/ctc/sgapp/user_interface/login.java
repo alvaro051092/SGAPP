@@ -22,7 +22,6 @@ public class login extends AppCompatActivity {
 
     private ProgressBar loading;
     private String usrTexto;
-//    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,6 @@ public class login extends AppCompatActivity {
         final EditText usuario      = (EditText) findViewById(R.id.lgn_txt_user);
         final EditText password     = (EditText) findViewById(R.id.lgn_txt_psw);
         Button btnIniciar           = (Button) findViewById(R.id.lgn_btn_iniciar);
-//        btnLogout                   = (Button) findViewById(R.id.lgn_btn_logout);
 
         if(loPersona.getInstancia(getApplicationContext()).SesionValida())
         {
@@ -125,16 +123,6 @@ public class login extends AppCompatActivity {
 
             Intent intent = new Intent(this, menu_lateral.class);
             startActivity(intent);
-
-            //esto se va si el boton se mueve al menu lateral
-            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
-            {
-//                btnLogout.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-//                btnLogout.setVisibility(View.INVISIBLE);
-            }
 
             loading.setVisibility(View.INVISIBLE);
         }

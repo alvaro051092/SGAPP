@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SGAPP</string>
+    <string name="app_name">Gestion Academica</string>
     <string name="Usuario">Usuario</string>
     <string name="Password">Contraseña</string>
     <string name="Inscribir">Inscribir</string>
@@ -11,10 +11,6 @@
     <string name="FECHAHASTA">Inscripción Hasta:</string>
     <string name="FECHA_EXAMEN">Fecha de Examen:</string>
 
-
-    <string name="xxxxx">xxxxx</string>
-    <string name="xxxxxx">xxxxxxx</string>
-    <string name="xxxxxxx">xxxxxxxx</string>
     <string name="title_activity_lstevaluacion_incripcion_alumno2">
         lstevaluacion_incripcion_alumno2
     </string>
@@ -26,9 +22,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_escolaridad">escolaridad</string>
-    <string name="title_activity_sssssssss">sssssssss</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_lateral_menu">lateral_menu</string>
+
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
 </resources>

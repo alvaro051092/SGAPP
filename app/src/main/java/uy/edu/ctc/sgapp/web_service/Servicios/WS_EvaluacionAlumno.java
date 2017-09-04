@@ -6,7 +6,7 @@ package uy.edu.ctc.sgapp.web_service.Servicios;
 
 public class WS_EvaluacionAlumno {
 
-    public static final Servicio servicio                       = new Servicio("http://192.168.1.2:8084/GestionAcademica/ws_EvaluacionAlumno", "http://WebService/");
+    public static final Servicio servicio                       = new Servicio("http://www.alvarodevotto.com/ws_EvaluacionAlumno", "http://WebService/");
     public static final Servicio.Metodo EvaluacionesPorAlumno   = new Servicio.Metodo("EvaluacionesParaInscripcion", "http://WebService/ws_EvaluacionAlumno/EvaluacionesParaInscripcionRequests");
     public static final Servicio.Metodo ListaPorAlumno          = new Servicio.Metodo("ListaPorAlumno", "http://WebService/ws_EvaluacionAlumno/EvaluacionesFinalizadasRequest");
     public static final Servicio.Metodo ListaPendiente          = new Servicio.Metodo("ListaPendiente", "http://WebService/ws_EvaluacionAlumno/ListaPendienteRequest");
