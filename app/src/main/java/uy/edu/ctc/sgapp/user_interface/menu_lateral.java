@@ -1,5 +1,6 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -7,10 +8,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Layout;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -33,8 +37,6 @@ import uy.edu.ctc.sgapp.utiles.Opciones_Menu;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.ws_evaluacionalumno;
 import uy.edu.ctc.sgapp.web_service.ws_persona;
-
-import static uy.edu.ctc.sgapp.R.id.listEvalParaInscribirse;
 
 public class menu_lateral extends AppCompatActivity {
     private ListView listMenuLateral;
@@ -60,10 +62,7 @@ public class menu_lateral extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_lateral);
 
-        ActionBar acBar = getSupportActionBar();
-        acBar.setIcon(R.drawable.burger_icon);
-//        acBar.setHomeButtonEnabled(true);
-//        acBar.setDisplayHomeAsUpEnabled(true);
+        showActionBar();
 
         listEvaluaciones    = (ListView) findViewById(R.id.listEvaluaciones);
         listMenuLateral     = (ListView) findViewById(R.id.menuLateral);
@@ -82,6 +81,35 @@ public class menu_lateral extends AppCompatActivity {
 
                 IntentMenu(obj);
 
+            }
+        });
+
+
+    }
+
+    private void showActionBar() {
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.action_bar, null);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled (false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setCustomView(v);
+
+        ImageButton burger = (ImageButton) findViewById(R.id.imgbtn_burger);
+
+        burger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(drawerLayout.isDrawerOpen(listMenuLateral))
+                {
+                    drawerLayout.closeDrawer(listMenuLateral);
+                }
+                else
+                {
+                    drawerLayout.openDrawer(listMenuLateral);
+                }
             }
         });
     }
@@ -185,25 +213,6 @@ public class menu_lateral extends AppCompatActivity {
         // 3er paso, se refresco la ListView con los datos cargados en el retObject paso 1 y 2
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if(id == android.R.id.home)
-        {
-            if(drawerLayout.isDrawerOpen(listMenuLateral))
-            {
-                drawerLayout.closeDrawer(listMenuLateral);
-            }
-            else
-            {
-                drawerLayout.openDrawer(listMenuLateral);
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public void cargarMenu()
     {
         Opciones_Menu OM = new Opciones_Menu();
@@ -266,24 +275,13 @@ public class menu_lateral extends AppCompatActivity {
         if(!retorno.SurgioError()){
 
             loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();
-//            loading.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), "Sesion cerrada correctamente", Toast.LENGTH_SHORT).show();
 
             Intent d = new Intent(this, login.class);
             startActivity(d);
-//            if(loPersona.getInstancia(getApplicationContext()).SesionValida())
-//            {
-////                btnLogout.setVisibility(View.VISIBLE);
-//            }
-//            else
-//            {
-////                btnLogout.setVisibility(View.INVISIBLE);
-//            }
-
         }
         else
         {
-//            loading.setVisibility(View.INVISIBLE);
             Toast.makeText(getApplicationContext(), retorno.getMensaje().getMensaje(), Toast.LENGTH_SHORT).show();
         }
     }

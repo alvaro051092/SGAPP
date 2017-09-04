@@ -22,7 +22,7 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".user_interface.MainActivity"></activity>
+        <activity android:name=".user_interface.MainActivity" />
         <activity android:name=".user_interface.Alvaro" />
         <activity android:name=".user_interface.Alfredo" />
         <activity android:name=".user_interface.login">
