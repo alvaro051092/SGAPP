@@ -55,6 +55,13 @@ public class Utilidades {
                 Log.e("UTILDIAD", "b");
                 date = httpHeaderDateFormatter.parse(fecha);
             } catch (ParseException e) {
+
+                httpHeaderDateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+                try {
+                    date = httpHeaderDateFormatter.parse(fecha);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
                 // otherwise we just leave it empty
             }
         }
