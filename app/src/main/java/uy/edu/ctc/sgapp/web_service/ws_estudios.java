@@ -98,7 +98,7 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
     }
 
     public boolean lstEstudiosPorAlumno()
-        {
+    {
         boolean resul                       = true;
 
         SDT_PersonaEstudio SDT_PE           = new SDT_PersonaEstudio();
@@ -244,8 +244,8 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
                                     ic_mod.getPropertyInfo(k, pi_mod);
 
                                     String objetoPadre_mod = pi_mod.name;
-//                                    Log.e("Pi.NAME K: ", objetoPadre_mod.toString());
-//                                    Log.e("IC K: ", ic_mod.getProperty(k).toString());
+                                    Log.e("Pi.NAME K: ", objetoPadre_mod.toString());
+                                    Log.e("IC K: ", ic_mod.getProperty(k).toString());
 
                                     modulo.setField(objetoPadre_mod, ic_mod.getProperty(k).toString());
 
@@ -261,8 +261,8 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
                                             ic_cur.getPropertyInfo(l, pi_cur);
 
                                             String objetoPadre_cur = pi_cur.name;
-//                                        Log.e("Pi.NAME L: ", objetoPadre_cur.toString());
-//                                        Log.e("IC L: ", ic_cur.getProperty(l).toString());
+                                        Log.e("Pi.NAME L: ", objetoPadre_cur.toString());
+                                        Log.e("IC L: ", ic_cur.getProperty(l).toString());
 
                                             curso.setField(objetoPadre_cur, ic_cur.getProperty(l).toString());
                                         }
@@ -283,8 +283,8 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
                                     ic_cur.getPropertyInfo(l, pi_cur);
 
                                     String objetoPadre_cur = pi_cur.name;
-//                                Log.e("Pi.NAME L: ", objetoPadre_cur.toString());
-//                                Log.e("IC L: ", ic_cur.getProperty(l).toString());
+                                Log.e("Pi.NAME O: ", objetoPadre_cur.toString());
+                                Log.e("IC O: ", ic_cur.getProperty(l).toString());
 
                                     curso.setField(objetoPadre_cur, ic_cur.getProperty(l).toString());
                                 }

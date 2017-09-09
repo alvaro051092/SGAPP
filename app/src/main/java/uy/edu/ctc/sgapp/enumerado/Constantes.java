@@ -15,7 +15,8 @@ public enum Constantes {
     VERSION("0.1.0"),
     SEPARADOR("#||#"),
     WS_USR_APP("ws_app"),
-    WS_PSW_APP("$.WSusApp%");
+    WS_PSW_APP("$.WSusApp%"),
+    URL_WS("http://www.alvarodevotto.com/");
 
     Constantes(){
         

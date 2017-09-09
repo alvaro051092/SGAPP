@@ -83,8 +83,6 @@ public class menu_lateral extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     private void showActionBar() {
@@ -143,7 +141,6 @@ public class menu_lateral extends AppCompatActivity {
     //Retorno Evaluaciones Pendientes
     public void EvaluacionesPendiente(Retorno_MsgObj retorno)
     {
-        System.out.println("1");
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
         {
             for (Object obj : retorno.getLstObjetos()) {
@@ -183,7 +180,6 @@ public class menu_lateral extends AppCompatActivity {
     //Retorno Evaluaciones para Inscribir
     public void EvaluacionesParaInscripcion(Retorno_MsgObj retorno)
     {
-        System.out.println("2");
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
         {
             for (Object obj : retorno.getLstObjetos()) {

@@ -77,7 +77,10 @@ public class Tab_Curso extends Fragment {
             List<Object> lstObj = new ArrayList<>();
             for(Object obj : retorno.getLstObjetos())
             {
+                System.out.println("ESC: " + obj.toString());
                 Escolaridad esc = (Escolaridad) obj;
+//                System.out.println("ESC: " + esc.toString());
+//                System.out.println("ESC: " + esc.getCurso());
                 if(esc.getModulo() != null || esc.getCurso() != null)
                 {
                     lstObj.add(esc);

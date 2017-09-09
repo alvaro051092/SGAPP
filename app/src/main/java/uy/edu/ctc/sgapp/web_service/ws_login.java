@@ -11,6 +11,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 import uy.edu.ctc.sgapp.entidad.Persona;
+import uy.edu.ctc.sgapp.enumerado.Constantes;
 import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.user_interface.Alvaro;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
@@ -39,7 +40,7 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
 
 
         final String NAMESPACE = "http://WebService/";
-        final String URL="http://192.168.1.2:8084/GestionAcademica/ws_login";
+        final String URL= Constantes.URL_WS.getValor() + "ws_login";
         final String METHOD_NAME = "Login";
         final String SOAP_ACTION = "http://WebService/ws_login/LoginRequest";
 
