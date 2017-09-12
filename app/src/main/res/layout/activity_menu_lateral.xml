@@ -24,9 +24,10 @@ tools:context=".user_interface.menu_lateral">
         android:id="@+id/menuLateral"
         android:layout_width="280dp"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
         android:layout_gravity="start"
-        android:divider="#000000"
-        android:dividerHeight="1dp"/>
+        android:background="#FFFFFF"
+        android:divider="?attr/colorButtonNormal"
+        android:dividerHeight="1dp"
+        android:textSize="16sp" />
 
 </android.support.v4.widget.DrawerLayout>

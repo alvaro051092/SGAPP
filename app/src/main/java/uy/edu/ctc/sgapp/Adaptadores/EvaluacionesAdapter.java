@@ -68,7 +68,7 @@ public class EvaluacionesAdapter extends BaseAdapter{
 
         final Calendario cal     = (Calendario) getItem(posicion);
 
-        Curso_Carrera.setText("Carrera / Curso: " + cal.getEvaluacion().getNombreCarreraCurso());
+        Curso_Carrera.setText(cal.getEvaluacion().getNombreCarreraCurso());
         materia.setText("Materia: " + String.valueOf(cal.getEvaluacion().getEstudioNombre()));
         evaluacion.setText("Evaluación: " + cal.getEvaluacion().getEvlNom());
         fechaD.setText("Fecha Desde: " + new SimpleDateFormat("dd/MM/yyyy").format(cal.getEvlInsFchDsd()));
