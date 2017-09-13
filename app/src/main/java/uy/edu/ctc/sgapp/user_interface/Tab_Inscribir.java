@@ -3,7 +3,10 @@ package uy.edu.ctc.sgapp.user_interface;
 import android.content.DialogInterface;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import uy.edu.ctc.sgapp.R;
 import uy.edu.ctc.sgapp.entidad.Calendario;
 import uy.edu.ctc.sgapp.entidad.CalendarioAlumno;
 import uy.edu.ctc.sgapp.entidad.Persona;
+import uy.edu.ctc.sgapp.enumerado.Constantes;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.loPersona;
@@ -38,7 +42,6 @@ public class Tab_Inscribir extends Fragment {
     Calendario cal;
     Date fechaActual;
     SimpleDateFormat sdf;
-    Object obj;
 
     private ListView listEvalParaInscribirse;
     private EvaluacionesAdapter evaAdapter;
@@ -48,7 +51,9 @@ public class Tab_Inscribir extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_inscribir, container, false);
 
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+        ActionBar acBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        acBar.setHomeButtonEnabled(true);
+        acBar.setDisplayHomeAsUpEnabled(true);
 
         cargarDatos();
 
@@ -56,50 +61,7 @@ public class Tab_Inscribir extends Fragment {
 
         cargarEvaluaciones();
 
-        listEvalParaInscribirse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, final View view, int i, long l) {
-
-                obj = listEvalParaInscribirse.getItemAtPosition(i);
-
-                dialog.setMessage("¿Desea inscribirse?");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("Inscribirme", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                    Aceptar(obj);
-
-                    }
-                });
-                dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i)
-                    {
-                    }
-                });
-                dialog.show();
-            }
-        });
-
         return rootView;
-    }
-
-    public void Aceptar(Object obj)
-    {
-        calAlumno = new CalendarioAlumno();
-        cal = new Calendario();
-
-        cal = (Calendario) obj;
-
-        calAlumno.setAlumno(per);
-        calAlumno.setCalendario(cal);
-
-        parametro = new Retorno_MsgObj();
-        parametro.setObjeto(calAlumno);
-
-        ws_evaluacionalumno ws = new ws_evaluacionalumno(this, PersonaServicioMetodo.INSCRIBIRALUMNO, parametro);
-        ws.execute();
     }
 
     public void EvaluacionesParaInscripcion(Retorno_MsgObj retorno)
@@ -107,32 +69,14 @@ public class Tab_Inscribir extends Fragment {
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No esta inscripto a ninguna Evaluacion " + TipoMensaje.ERROR);
-            evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>());
+            evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>(), Constantes.INSCRIBIR.toString());
             if(listEvalParaInscribirse != null) listEvalParaInscribirse.setAdapter(evaAdapter);
         }
         else
         {
-            evaAdapter = new EvaluacionesAdapter(getContext(), retorno.getLstObjetos());
+            evaAdapter = new EvaluacionesAdapter(getContext(), retorno.getLstObjetos(), Constantes.INSCRIBIR.toString());
 
             if(listEvalParaInscribirse != null) listEvalParaInscribirse.setAdapter(evaAdapter);
-        }
-    }
-
-    private void InscribirAlumno(Retorno_MsgObj retorno)
-    {
-        if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
-        {
-            Toast.makeText(getContext(), "Estas Inscripto", Toast.LENGTH_LONG).show();
-
-            cargarDatos();
-
-            //Recargo la lista inscribir
-            cargarEvaluaciones();
-
-        }
-        else
-        {
-            Toast.makeText(getContext(), "Error, no has podido inscribirte", Toast.LENGTH_LONG).show();
         }
     }
 

@@ -45,6 +45,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
     private Object clase;
     private PersonaServicioMetodo metodo;
     private String metodoToCall;
+    private int aux;
 
     public ws_evaluacionalumno(Object pClase, PersonaServicioMetodo pMetodo, Retorno_MsgObj pParametro) {
         this.clase = pClase;
@@ -249,6 +250,15 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
     public boolean InscribirAlumno()
     {
         retorno = new Retorno_MsgObj(new Mensajes("Error", TipoMensaje.ERROR));
+
+        if(parametro.getLstObjetos() != null)
+        {
+            if(parametro.getLstObjetos().size() > 0)
+            {
+                retorno.setObjeto(parametro.getLstObjetos().get(0));
+            }
+        }
+
         boolean resul = true;
 
         SoapObject request = new SoapObject(WS_EvaluacionAlumno.servicio.NAMESPACE, WS_EvaluacionAlumno.InscribirAlumno.METHOD_NAME);
@@ -303,6 +313,16 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
     public boolean DesinscribirAlumno()
     {
         retorno = new Retorno_MsgObj();
+
+        if(parametro.getLstObjetos() != null)
+        {
+            if(parametro.getLstObjetos().size() > 0)
+            {
+                retorno.setObjeto(parametro.getLstObjetos().get(0));
+            }
+        }
+
+
         boolean resul = true;
 
         SoapObject request = new SoapObject(WS_EvaluacionAlumno.servicio.NAMESPACE, WS_EvaluacionAlumno.DesinscribirAlumno.METHOD_NAME);
@@ -347,6 +367,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 //                    Log.e("RESULTADO 2", pi.name + " : " + ic.getProperty(f).toString());
 
                     if(objetoPadre.equals("mensaje")) retorno.setField(pi.name, ic.getProperty(f).toString());
+
                 }
             }
         }
@@ -586,7 +607,6 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
             }
             if(calendario.getCalCod() != null) lstObj.add(calendario);
         }
-        System.out.println("Lista de Calendarios!!!!! " + lstObj.toString());
         return lstObj;
     }
 }

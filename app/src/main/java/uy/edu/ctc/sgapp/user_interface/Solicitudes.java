@@ -1,7 +1,10 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,6 +50,10 @@ public class Solicitudes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
 
+        ActionBar acBar = getSupportActionBar();
+        acBar.setHomeButtonEnabled(true);
+        acBar.setDisplayHomeAsUpEnabled(true);
+
         lstSolicitudes = (ListView) findViewById(R.id.lst_Solicitudes);
 
         spin_TpoSol = (Spinner) findViewById(R.id.spin_solicitudes);
@@ -89,6 +96,19 @@ public class Solicitudes extends AppCompatActivity {
                 solicitar();
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == android.R.id.home)
+        {
+            Intent intent = new Intent(Solicitudes.this, menu_lateral.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void CargarSpinner ()

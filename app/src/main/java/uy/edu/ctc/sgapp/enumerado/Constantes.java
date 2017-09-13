@@ -16,7 +16,10 @@ public enum Constantes {
     SEPARADOR("#||#"),
     WS_USR_APP("ws_app"),
     WS_PSW_APP("$.WSusApp%"),
-    URL_WS("http://www.alvarodevotto.com/");
+    URL_WS("http://www.alvarodevotto.com/"),
+    BORRAR("Borrar"),
+    INSCRIBIR("Inscribir"),
+    MENU_LATERAL("MenuLateral");
 
     Constantes(){
         

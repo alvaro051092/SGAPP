@@ -20,6 +20,7 @@ import uy.edu.ctc.sgapp.R;
 import uy.edu.ctc.sgapp.entidad.Calendario;
 import uy.edu.ctc.sgapp.entidad.CalendarioAlumno;
 import uy.edu.ctc.sgapp.entidad.Persona;
+import uy.edu.ctc.sgapp.enumerado.Constantes;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.loPersona;
@@ -37,14 +38,11 @@ public class Tab_Borrado extends Fragment {
     Calendario cal;
     Date fechaActual;
     SimpleDateFormat sdf;
-    Object obj;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_borrado, container, false);
-
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
 
         cargarDatos();
 
@@ -52,49 +50,7 @@ public class Tab_Borrado extends Fragment {
 
         cargarEvaluaciones();
 
-        listEvalParaBorrarse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                obj = listEvalParaBorrarse.getItemAtPosition(i);
-
-                dialog.setMessage("¿Desea Borrarse su inscripcion?");
-                dialog.setCancelable(false);
-                dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-
-                    EliminarInscripcion(obj);
-
-                    }
-                });
-                dialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int i) {
-                    }
-                });
-                dialog.show();
-            }
-        });
-
         return rootView;
-    }
-
-    public void EliminarInscripcion(Object obj)
-    {
-        parametro = new Retorno_MsgObj();
-        per = new Persona();
-        cal = (Calendario) obj;
-
-        Long PerCod = loPersona.getInstancia(getContext()).DevolverCodigoPersona();
-
-        per.setPerCod(PerCod);
-        calAlumno.setAlumno(per);
-        calAlumno.setCalendario(cal);
-
-        parametro.setObjeto(calAlumno);
-
-        ws_evaluacionalumno ws = new ws_evaluacionalumno(this, PersonaServicioMetodo.DESINSCRIBIRALUMNO, parametro);
-        ws.execute();
     }
 
     public void EvaluacionesParaInscripcion(Retorno_MsgObj retorno)
@@ -102,31 +58,13 @@ public class Tab_Borrado extends Fragment {
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No esta inscripto a ninguna Evaluacion " + TipoMensaje.ERROR);
-            evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>());
+            evaAdapter = new EvaluacionesAdapter(getContext(), new ArrayList<>(), Constantes.BORRAR.toString());
             if(listEvalParaBorrarse != null) listEvalParaBorrarse.setAdapter(evaAdapter);
         }
         else
         {
-            evaAdapter = new EvaluacionesAdapter(getContext(), retorno.getLstObjetos());
+            evaAdapter = new EvaluacionesAdapter(getContext(), retorno.getLstObjetos(), Constantes.BORRAR.toString());
             if(listEvalParaBorrarse != null) listEvalParaBorrarse.setAdapter(evaAdapter);
-        }
-    }
-
-    // Metodo que recibe el resultado del servicio desinscribir alumno de evaluación
-    private void DesinscribirAlumno(Retorno_MsgObj retorno)
-    {
-        if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
-        {
-            Toast.makeText(getContext(), "Se elimino su inscripcion", Toast.LENGTH_LONG).show();
-
-            cargarDatos();
-
-            //Recargo lista borrar
-            cargarEvaluaciones();
-        }
-        else
-        {
-            Toast.makeText(getContext(), "No se pudo eliminar la inscripcion", Toast.LENGTH_LONG).show();
         }
     }
 

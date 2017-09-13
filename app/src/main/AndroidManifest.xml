@@ -25,7 +25,9 @@
         <activity android:name=".user_interface.MainActivity" />
         <activity android:name=".user_interface.Alvaro" />
         <activity android:name=".user_interface.Alfredo" />
-        <activity android:name=".user_interface.login">
+        <activity
+            android:name=".user_interface.login"
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,14 +36,18 @@
         </activity>
         <activity
             android:name=".user_interface.lstEvaluacionInscripcionAlumnos"
-            android:label="@string/title_activity_lst_evaluaciones_ingreso_alumnos"
+            android:label="@string/title_activity_lst_evaluacion_inscripcion_alumnos"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".user_interface.menu_lateral" />
+        <activity
+            android:name=".user_interface.menu_lateral"
+            android:label="@string/title_activity_menu_lateral"/>
         <activity
             android:name=".user_interface.escolaridad"
             android:label="@string/title_activity_escolaridad"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".user_interface.Solicitudes" />
+        <activity
+            android:name=".user_interface.Solicitudes"
+            android:label="@string/title_activity_solicitudes"/>
     </application>
 
 </manifest>

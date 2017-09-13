@@ -30,6 +30,7 @@ import uy.edu.ctc.sgapp.entidad.CalendarioAlumno;
 import uy.edu.ctc.sgapp.entidad.Menu;
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.entidad.Solicitud;
+import uy.edu.ctc.sgapp.enumerado.Constantes;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.logica.loPersona;
@@ -71,8 +72,8 @@ public class menu_lateral extends AppCompatActivity {
 
         cargarMenu();
 
-        CargarEvaluacionesPendientes();
         CargarEvaluaciones();
+        CargarEvaluacionesPendientes();
 
         listMenuLateral.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -203,7 +204,7 @@ public class menu_lateral extends AppCompatActivity {
 
         retObject.setLstObjetos(lstObj);
 
-        evaAdapter = new EvaluacionesAdapter(getApplicationContext(), retObject.getLstObjetos());
+        evaAdapter = new EvaluacionesAdapter(getApplicationContext(), retObject.getLstObjetos(), Constantes.MENU_LATERAL.toString());
         if(listEvaluaciones != null) listEvaluaciones.setAdapter(evaAdapter);
 
         // 3er paso, se refresco la ListView con los datos cargados en el retObject paso 1 y 2
