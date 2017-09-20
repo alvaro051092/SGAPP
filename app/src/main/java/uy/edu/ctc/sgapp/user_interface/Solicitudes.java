@@ -1,6 +1,8 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +40,7 @@ public class Solicitudes extends AppCompatActivity {
     private ListView lstSolicitudes;
     private solicitudAdapter solAdapter;
     private Spinner spin_TpoSol;
-    private Button btn_solicitar;
+    //private Button btn_solicitar;
     private Retorno_MsgObj parametro;
 
     Persona per;
@@ -56,46 +58,81 @@ public class Solicitudes extends AppCompatActivity {
 
         lstSolicitudes = (ListView) findViewById(R.id.lst_Solicitudes);
 
-        spin_TpoSol = (Spinner) findViewById(R.id.spin_solicitudes);
 
-        btn_solicitar = (Button) findViewById(R.id.btn_solicitar);
 
-        CargarSpinner();
+
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_add_solicitud);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+
+
+
+                final Dialog dialog = new Dialog(Solicitudes.this);
+                dialog.setContentView(R.layout.add_solicitud);
+                dialog.setTitle("Nueva solicitud");
+
+
+                spin_TpoSol = (Spinner) dialog.findViewById(R.id.spin_solicitudes);
+
+                spin_TpoSol.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        Object obj = spin_TpoSol.getItemAtPosition(i);
+
+                        String tpoSolNom = obj.toString();
+
+                        switch(tpoSolNom)
+                        {
+                            case "Escolaridad":
+                                TpoSolId = TipoSolicitud.ESCOLARIDAD;
+                                break;
+                            case "Constancia de estudio":
+                                TpoSolId = TipoSolicitud.CONSTANCIA_ESTUDIO;
+                                break;
+                            case "Duplicado de factura":
+                                TpoSolId = TipoSolicitud.DUPLICADO_FACTURA;
+                                break;
+                        }
+                    }
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+
+                CargarSpinner();
+
+
+                Button  btn_solicitar = (Button) dialog.findViewById(R.id.btn_solicitar);
+                btn_solicitar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        solicitar();
+                    }
+                });
+
+
+                dialog.show();
+
+            }
+        });
+
+
+
+
+
 
         CargarListview();
 
-        spin_TpoSol.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Object obj = spin_TpoSol.getItemAtPosition(i);
 
-                String tpoSolNom = obj.toString();
 
-                switch(tpoSolNom)
-                {
-                    case "Escolaridad":
-                        TpoSolId = TipoSolicitud.ESCOLARIDAD;
-                        break;
-                    case "Constancia de estudio":
-                        TpoSolId = TipoSolicitud.CONSTANCIA_ESTUDIO;
-                        break;
-                    case "Duplicado de factura":
-                        TpoSolId = TipoSolicitud.DUPLICADO_FACTURA;
-                        break;
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
 
-            }
-        });
-
-        btn_solicitar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                solicitar();
-            }
-        });
     }
 
     @Override

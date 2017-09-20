@@ -55,14 +55,12 @@ public class solicitudAdapter extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.itemsolicitud, null);
         }
 
-        TextView Solic      = (TextView) view.findViewById(R.id.txt_Solicitud);
         TextView Estado         = (TextView) view.findViewById(R.id.txt_Estado);
         TextView TipoSolicitud  = (TextView) view.findViewById(R.id.txt_TipoSolicitud);
 
         final Solicitud sol = (Solicitud) getItem(posicion);
 
         //cargar los textview respectivos
-        Solic.setText("Solicitud");
         Estado.setText("Estado: " + sol.getSolEst().getNombre().toString());
         TipoSolicitud.setText("Tipo de Solicitud: " + sol.getSolTpo().getNombre().toString());
 
