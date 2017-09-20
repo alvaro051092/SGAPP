@@ -4,6 +4,7 @@ package uy.edu.ctc.sgapp.web_service;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -27,7 +28,9 @@ import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.entidad.PlanEstudio;
 import uy.edu.ctc.sgapp.entidad.TipoEvaluacion;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
+import uy.edu.ctc.sgapp.enumerado.ServicioWeb;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
+import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.utiles.Mensajes;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.Servicios.WS_EvaluacionAlumno;
@@ -142,6 +145,13 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.EVALUACION_ALUMNO)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_EvaluacionAlumno.EvaluacionesPorAlumno.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
@@ -179,6 +189,13 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.EVALUACION_ALUMNO)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_EvaluacionAlumno.ListaPorAlumno.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
@@ -231,6 +248,13 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.EVALUACION_ALUMNO)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_EvaluacionAlumno.ListaPendiente.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
@@ -270,7 +294,6 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
         long AluPerCod  = calAlumno.getAlumno().getPerCod();
         long CalCod     = calAlumno.getCalendario().getCalCod();
 
-        request.addProperty("token", "pedritoelescamoso");
         request.addProperty("AluPerCod", AluPerCod);
         request.addProperty("CalCod", CalCod);
 
@@ -280,6 +303,13 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.EVALUACION_ALUMNO)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_EvaluacionAlumno.InscribirAlumno.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();
@@ -334,7 +364,6 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
         long PerCod   = calAlumno.getAlumno().getPerCod();
         long CalCod     = calAlumno.getCalendario().getCalCod();
 
-        request.addProperty("token", "pedritoelescamoso");
         request.addProperty("PerCod", PerCod);
         request.addProperty("CalCod", CalCod);
 
@@ -344,6 +373,14 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.EVALUACION_ALUMNO)));
+
+            //------------------------------------------------------------------------------------------
+
+
             transporte.call(WS_EvaluacionAlumno.DesinscribirAlumno.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();

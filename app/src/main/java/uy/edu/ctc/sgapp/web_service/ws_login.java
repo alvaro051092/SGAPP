@@ -15,6 +15,9 @@ import uy.edu.ctc.sgapp.enumerado.Constantes;
 import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.user_interface.Alvaro;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
+import uy.edu.ctc.sgapp.web_service.Servicios.WS_Login;
+
+import static android.provider.ContactsContract.CommonDataKinds.Website.URL;
 
 /**
  * Created by alvar on 01/08/2017.
@@ -38,13 +41,12 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
 
         boolean resul = true;
 
+//        final String NAMESPACE = "http://WebService/";
+//        final String URL= Constantes.URL_WS.getValor() + "ws_login";
+//        final String METHOD_NAME = "Login";
+//        final String SOAP_ACTION = "http://WebService/ws_login/LoginRequest";
 
-        final String NAMESPACE = "http://WebService/";
-        final String URL= Constantes.URL_WS.getValor() + "ws_login";
-        final String METHOD_NAME = "Login";
-        final String SOAP_ACTION = "http://WebService/ws_login/LoginRequest";
-
-        SoapObject request = new SoapObject(NAMESPACE, METHOD_NAME);
+        SoapObject request = new SoapObject(WS_Login.servicio.NAMESPACE, WS_Login.Login.METHOD_NAME);
 
         SoapSerializationEnvelope envelope =
                 new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -61,17 +63,16 @@ public class ws_login extends AsyncTask<String,Integer,Boolean> {
             e.printStackTrace();
         }
 
-        request.addProperty("mdltoken", "mdltoken");
         request.addProperty("pUser", usuario);
         request.addProperty("pPassword", password);
 
         envelope.setOutputSoapObject(request);
 
-        HttpTransportSE transporte = new HttpTransportSE(URL);
+        HttpTransportSE transporte = new HttpTransportSE(WS_Login.servicio.URL);
 
         try
         {
-            transporte.call(SOAP_ACTION, envelope);
+            transporte.call(WS_Login.Login.SOAP_ACTION, envelope);
 
             SoapPrimitive resSoap =(SoapPrimitive)envelope.getResponse();
 

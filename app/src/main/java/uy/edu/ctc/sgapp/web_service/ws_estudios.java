@@ -3,6 +3,7 @@ package uy.edu.ctc.sgapp.web_service;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -24,7 +25,9 @@ import uy.edu.ctc.sgapp.entidad.Modulo;
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.entidad.PlanEstudio;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
+import uy.edu.ctc.sgapp.enumerado.ServicioWeb;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
+import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.user_interface.escolaridad;
 import uy.edu.ctc.sgapp.utiles.Mensajes;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
@@ -120,7 +123,6 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
 
         long PerCod  = per.getPerCod();
 
-        request.addProperty("token", "pedritoelescamoso");
         request.addProperty("PerCod", PerCod);
 
         envelope.setOutputSoapObject(request);
@@ -129,6 +131,13 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.ESTUDIOS)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_Estudios.Estudios.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();

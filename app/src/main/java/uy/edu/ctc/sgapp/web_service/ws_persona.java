@@ -134,7 +134,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             //------------------------------------------------------------------------------------------
 
             List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.PERSONA)));
 
             //------------------------------------------------------------------------------------------
 
@@ -208,7 +208,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             //------------------------------------------------------------------------------------------
 
             List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.PERSONA)));
 
             //------------------------------------------------------------------------------------------
 
@@ -285,7 +285,7 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
             //------------------------------------------------------------------------------------------
 
             List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
-            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN)));
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.PERSONA)));
 
             //------------------------------------------------------------------------------------------
 
@@ -351,10 +351,6 @@ public class ws_persona extends AsyncTask<String,Integer,Boolean> {
 
         Log.e("Encriptado", usuario);
 
-        Log.e("RESULTADO", persona.getPerUsrMod());
-        Log.e("RESULTADO", persona.getPerPass());
-
-        request.addProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.LOGIN));
         request.addProperty("pUser", usuario);
         request.addProperty("pPassword", password);
 

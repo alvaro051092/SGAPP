@@ -3,6 +3,7 @@ package uy.edu.ctc.sgapp.web_service;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.ksoap2.HeaderProperty;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
@@ -19,8 +20,10 @@ import uy.edu.ctc.sgapp.entidad.Escolaridad;
 import uy.edu.ctc.sgapp.entidad.Persona;
 import uy.edu.ctc.sgapp.entidad.Solicitud;
 import uy.edu.ctc.sgapp.enumerado.PersonaServicioMetodo;
+import uy.edu.ctc.sgapp.enumerado.ServicioWeb;
 import uy.edu.ctc.sgapp.enumerado.TipoMensaje;
 import uy.edu.ctc.sgapp.enumerado.TipoSolicitud;
+import uy.edu.ctc.sgapp.logica.Seguridad;
 import uy.edu.ctc.sgapp.utiles.Mensajes;
 import uy.edu.ctc.sgapp.utiles.Retorno_MsgObj;
 import uy.edu.ctc.sgapp.web_service.Servicios.WS_Solicitud;
@@ -119,6 +122,12 @@ public class ws_solicitudes extends AsyncTask<String,Integer,Boolean> {
         HttpTransportSE transporte = new HttpTransportSE(WS_Solicitud.servicio.URL);
 
         try {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.SOLICITUDES)));
+
+            //------------------------------------------------------------------------------------------
 
             transporte.call(WS_Solicitud.RealizarSolicitud.SOAP_ACTION, envelope);
 
@@ -174,9 +183,6 @@ public class ws_solicitudes extends AsyncTask<String,Integer,Boolean> {
 
         long PerCod  = sol.getAlumno().getPerCod();
 
-//        System.out.println("PERCOD: " + PerCod);
-
-        request.addProperty("token", "pedritoelescamoso");
         request.addProperty("PerCod", PerCod);
 
         envelope.setOutputSoapObject(request);
@@ -185,6 +191,13 @@ public class ws_solicitudes extends AsyncTask<String,Integer,Boolean> {
 
         try
         {
+            //------------------------------------------------------------------------------------------
+
+            List<HeaderProperty> headerList = new ArrayList<HeaderProperty>();
+            headerList.add(new HeaderProperty("token", Seguridad.GetInstancia().getTokenWS(ServicioWeb.SOLICITUDES)));
+
+            //------------------------------------------------------------------------------------------
+
             transporte.call(WS_Solicitud.SolicitudesActivas.SOAP_ACTION, envelope);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();

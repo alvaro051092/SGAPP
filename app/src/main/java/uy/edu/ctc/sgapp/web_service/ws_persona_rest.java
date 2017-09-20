@@ -206,7 +206,6 @@ public class ws_persona_rest extends AsyncTask<String,Integer,Boolean> {
 
         Log.e("USUARIO", persona.getPerUsrMod());
 
-        request.addProperty("token", "token");
         request.addProperty("pUser", persona.getPerUsrMod());
 
         envelope.setOutputSoapObject(request);
