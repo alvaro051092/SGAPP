@@ -129,7 +129,7 @@ public class ws_solicitudes extends AsyncTask<String,Integer,Boolean> {
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_Solicitud.RealizarSolicitud.SOAP_ACTION, envelope);
+            transporte.call(WS_Solicitud.RealizarSolicitud.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -198,7 +198,7 @@ public class ws_solicitudes extends AsyncTask<String,Integer,Boolean> {
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_Solicitud.SolicitudesActivas.SOAP_ACTION, envelope);
+            transporte.call(WS_Solicitud.SolicitudesActivas.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 

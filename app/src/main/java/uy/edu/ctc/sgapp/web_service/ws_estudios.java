@@ -138,7 +138,7 @@ public class ws_estudios extends AsyncTask<String,Integer,Boolean> {
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_Estudios.Estudios.SOAP_ACTION, envelope);
+            transporte.call(WS_Estudios.Estudios.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();
 

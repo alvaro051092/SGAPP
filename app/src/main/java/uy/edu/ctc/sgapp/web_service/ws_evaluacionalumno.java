@@ -152,7 +152,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_EvaluacionAlumno.EvaluacionesPorAlumno.SOAP_ACTION, envelope);
+            transporte.call(WS_EvaluacionAlumno.EvaluacionesPorAlumno.SOAP_ACTION, envelope,headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -196,7 +196,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_EvaluacionAlumno.ListaPorAlumno.SOAP_ACTION, envelope);
+            transporte.call(WS_EvaluacionAlumno.ListaPorAlumno.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -255,7 +255,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_EvaluacionAlumno.ListaPendiente.SOAP_ACTION, envelope);
+            transporte.call(WS_EvaluacionAlumno.ListaPendiente.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj =(SoapObject) envelope.getResponse();
 
@@ -310,7 +310,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
             //------------------------------------------------------------------------------------------
 
-            transporte.call(WS_EvaluacionAlumno.InscribirAlumno.SOAP_ACTION, envelope);
+            transporte.call(WS_EvaluacionAlumno.InscribirAlumno.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();
 
@@ -381,7 +381,7 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
             //------------------------------------------------------------------------------------------
 
 
-            transporte.call(WS_EvaluacionAlumno.DesinscribirAlumno.SOAP_ACTION, envelope);
+            transporte.call(WS_EvaluacionAlumno.DesinscribirAlumno.SOAP_ACTION, envelope, headerList);
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();
 
