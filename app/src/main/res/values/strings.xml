@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gestion Academica</string>
+    <string name="app_name">SGA - CTC</string>
     <string name="Usuario">Usuario</string>
     <string name="Password">Contraseña</string>
     <string name="Inscribir">Inscribir</string>
@@ -11,27 +11,14 @@
     <string name="FECHAHASTA">Inscripción Hasta:</string>
     <string name="FECHA_EXAMEN">Fecha de Examen:</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
-
     <string name="title_activity_tab__borrado">Tab_Borrado</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="title_activity_login">SGA</string>
+    <string name="title_activity_login">SGA - CTC</string>
     <string name="title_activity_escolaridad">Escolaridad</string>
     <string name="title_activity_lst_evaluacion_inscripcion_alumnos">Evaluaciones</string>
     <string name="title_activity_menu_lateral">Principal</string>
     <string name="title_activity_solicitudes">Solicitudes</string>
-
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-
-
-
-    <string name="open">Open</string>
-    <string name="close">Close</string>
 
 </resources>
