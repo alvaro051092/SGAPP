@@ -19,7 +19,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="title_activity_login">Inicio de Sesion</string>
+    <string name="title_activity_login">SGA</string>
     <string name="title_activity_escolaridad">Escolaridad</string>
     <string name="title_activity_lst_evaluacion_inscripcion_alumnos">Evaluaciones</string>
     <string name="title_activity_menu_lateral">Principal</string>

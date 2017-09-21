@@ -144,11 +144,13 @@ public class menu_lateral extends AppCompatActivity {
     {
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
         {
+            System.out.println("Pendientes: " + retorno.getLstObjetos().toString());
             for (Object obj : retorno.getLstObjetos()) {
                 Calendario cal = (Calendario) obj;
 
                 lstObj.add(cal);
             }
+            llenarListView();
         }
         else
         {
@@ -183,19 +185,19 @@ public class menu_lateral extends AppCompatActivity {
     {
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.MENSAJE)
         {
+            System.out.println("Para Inscribir: " + retorno.getLstObjetos().toString());
             for (Object obj : retorno.getLstObjetos()) {
                 Calendario cal = (Calendario) obj;
 
                 lstObj.add(cal);
             }
-            llenarListView();
         }
         else
         {
             System.out.println("No hay evaluaciones para inscripción o surgió un problema");
         }
         // 1er paso fue cargr el retObject con las evaluaciones para inscripción
-        // Sigue el 2do paso
+        // Sigue al 2do paso
     }
 
     public void llenarListView()
@@ -254,7 +256,8 @@ public class menu_lateral extends AppCompatActivity {
         }
     }
 
-    private void CerrarSesion(){
+    private void CerrarSesion()
+    {
         if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
 
             Persona persona = new Persona();
@@ -268,7 +271,8 @@ public class menu_lateral extends AppCompatActivity {
         }
     }
 
-    private void RetornoLogout(Retorno_MsgObj retorno){
+    private void RetornoLogout(Retorno_MsgObj retorno)
+    {
         if(!retorno.SurgioError()){
 
             loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();

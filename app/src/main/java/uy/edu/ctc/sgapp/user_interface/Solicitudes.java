@@ -1,9 +1,11 @@
 package uy.edu.ctc.sgapp.user_interface;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ public class Solicitudes extends AppCompatActivity {
     private ListView lstSolicitudes;
     private solicitudAdapter solAdapter;
     private Spinner spin_TpoSol;
-    //private Button btn_solicitar;
+    private AlertDialog.Builder dialog;
     private Retorno_MsgObj parametro;
 
     Persona per;
@@ -56,6 +58,8 @@ public class Solicitudes extends AppCompatActivity {
         acBar.setHomeButtonEnabled(true);
         acBar.setDisplayHomeAsUpEnabled(true);
 
+        dialog = new AlertDialog.Builder(this);
+
         lstSolicitudes = (ListView) findViewById(R.id.lst_Solicitudes);
 
 
@@ -64,20 +68,26 @@ public class Solicitudes extends AppCompatActivity {
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_add_solicitud);
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
 
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(Solicitudes.this);
+                mBuilder.setTitle("Nueva Solicitud");
+                View mView = getLayoutInflater().inflate(R.layout.add_solicitud, null);
+                spin_TpoSol = (Spinner) mView.findViewById(R.id.spin_solicitudes);
+                CargarSpinner();
 
-
-
-
-                final Dialog dialog = new Dialog(Solicitudes.this);
-                dialog.setContentView(R.layout.add_solicitud);
-                dialog.setTitle("Nueva solicitud");
-
-
-                spin_TpoSol = (Spinner) dialog.findViewById(R.id.spin_solicitudes);
+                mBuilder.setPositiveButton("Solicitar", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i)
+                    {
+                        solicitar();
+                    }
+                });
 
                 spin_TpoSol.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -105,19 +115,8 @@ public class Solicitudes extends AppCompatActivity {
                     }
                 });
 
-                CargarSpinner();
-
-
-                Button  btn_solicitar = (Button) dialog.findViewById(R.id.btn_solicitar);
-                btn_solicitar.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                        solicitar();
-                    }
-                });
-
-
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
                 dialog.show();
 
             }
@@ -158,7 +157,9 @@ public class Solicitudes extends AppCompatActivity {
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lstTpoSol);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin_TpoSol.setAdapter(adapter);
+
     }
 
     public void solicitar()
