@@ -385,6 +385,8 @@ public class ws_evaluacionalumno extends AsyncTask<String,Integer,Boolean>{
 
             SoapObject resSoapObj = (SoapObject) envelope.getResponse();
 
+            Log.e("ALVARO", resSoapObj.toString());
+
             for (int i = 0; i < resSoapObj.getPropertyCount(); i++)
             {
                 SoapObject ic = (SoapObject)resSoapObj.getProperty(i);

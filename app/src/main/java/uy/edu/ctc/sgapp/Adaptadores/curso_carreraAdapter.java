@@ -70,7 +70,7 @@ public class curso_carreraAdapter extends BaseAdapter {
         EstudioNombre.setText("Curso/Carrera: " + esc.getNombreCarreraCurso());
         CursoCarrera.setText("Materia: " + esc.getEstudioNombre());
         Estado.setText("Estado: " + esc.getAprobacion());
-        Calificacion.setText("Calificación: " + esc.getEscCalVal().toString());
+        Calificacion.setText("Calificación: " + (esc.getEscCalVal() == null ? (esc.getEscCurVal() == null ? "" : esc.getEscCurVal()) : esc.getEscCalVal()));
 
         return view;
     }
