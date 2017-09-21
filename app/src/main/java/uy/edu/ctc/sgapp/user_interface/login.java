@@ -1,9 +1,11 @@
 package uy.edu.ctc.sgapp.user_interface;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -61,6 +63,10 @@ public class login extends AppCompatActivity {
 
                 if(!error)
                 {
+                    InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+
+                    inputMethodManager.hideSoftInputFromWindow(password.getWindowToken(), 0);
+
                     loading.setVisibility(View.VISIBLE);
                     IniciarSesion(user, psw);
                 }

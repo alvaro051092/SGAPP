@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -31,6 +32,7 @@ public class Tab_Borrado extends Fragment {
 
     private ListView listEvalParaBorrarse;
     private EvaluacionesAdapter evaAdapter;
+    private ProgressBar loading;
 
     Persona per;
     Retorno_MsgObj parametro;
@@ -44,6 +46,8 @@ public class Tab_Borrado extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_borrado, container, false);
 
+        loading = (ProgressBar) rootView.findViewById(R.id.tabbor_load);
+
         cargarDatos();
 
         listEvalParaBorrarse = (ListView) rootView.findViewById(R.id.listEvalParaBorrarse);
@@ -55,6 +59,8 @@ public class Tab_Borrado extends Fragment {
 
     public void EvaluacionesParaInscripcion(Retorno_MsgObj retorno)
     {
+        listEvalParaBorrarse.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No esta inscripto a ninguna Evaluacion " + TipoMensaje.ERROR);
@@ -70,6 +76,8 @@ public class Tab_Borrado extends Fragment {
 
     public void cargarEvaluaciones()
     {
+        listEvalParaBorrarse.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         per = new Persona();
         calAlumno = new CalendarioAlumno();
         if(loPersona.getInstancia(getContext()).SesionValida())

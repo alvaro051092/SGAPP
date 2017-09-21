@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,12 +28,14 @@ import uy.edu.ctc.sgapp.web_service.ws_estudios;
 import uy.edu.ctc.sgapp.web_service.ws_evaluacionalumno;
 
 import static uy.edu.ctc.sgapp.R.id.listCurso;
+import static uy.edu.ctc.sgapp.R.id.listEvalParaBorrarse;
 import static uy.edu.ctc.sgapp.R.id.listEvalParaInscribirse;
 
 public class Tab_Carrera extends Fragment {
 
     private ListView listCarrera;
     private curso_carreraAdapter cur_carAdapter;
+    private ProgressBar loading;
 
     Retorno_MsgObj parametro;
     Persona per;
@@ -42,6 +45,8 @@ public class Tab_Carrera extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_carrera, container, false);
+
+        loading = (ProgressBar) rootView.findViewById(R.id.tabcar_load);
 
         ActionBar acBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         acBar.setHomeButtonEnabled(true);
@@ -57,6 +62,8 @@ public class Tab_Carrera extends Fragment {
     //Metodo que consulta el servicio escolaridad
     public void cargarEscolaridad()
     {
+        listCarrera.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         per = new Persona();
         if(loPersona.getInstancia(getContext()).SesionValida())
         {
@@ -75,6 +82,8 @@ public class Tab_Carrera extends Fragment {
     //Metodo que recibe el retorno del servicio
     public void Estudios(Retorno_MsgObj retorno)
     {
+        listCarrera.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No posee ninguna escolaridad" + TipoMensaje.ERROR);

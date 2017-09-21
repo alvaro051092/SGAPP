@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -45,11 +46,14 @@ public class Tab_Inscribir extends Fragment {
 
     private ListView listEvalParaInscribirse;
     private EvaluacionesAdapter evaAdapter;
+    private ProgressBar loading;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_inscribir, container, false);
+
+        loading = (ProgressBar) rootView.findViewById(R.id.tabins_load);
 
         ActionBar acBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         acBar.setHomeButtonEnabled(true);
@@ -66,6 +70,8 @@ public class Tab_Inscribir extends Fragment {
 
     public void EvaluacionesParaInscripcion(Retorno_MsgObj retorno)
     {
+        listEvalParaInscribirse.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No esta inscripto a ninguna Evaluacion " + TipoMensaje.ERROR);
@@ -82,6 +88,8 @@ public class Tab_Inscribir extends Fragment {
 
     public void cargarEvaluaciones()
     {
+        listEvalParaInscribirse.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         if(loPersona.getInstancia(getContext()).SesionValida())
         {
             parametro  = new Retorno_MsgObj();

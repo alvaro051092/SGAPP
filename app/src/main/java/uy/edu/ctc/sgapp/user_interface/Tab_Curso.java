@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Tab_Curso extends Fragment {
 
     private ListView listCurso;
     private curso_carreraAdapter cur_carAdapter;
+    private ProgressBar loading;
 
     Retorno_MsgObj parametro;
     Persona per;
@@ -36,6 +38,8 @@ public class Tab_Curso extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_tab_curso, container, false);
+
+        loading = (ProgressBar) rootView.findViewById(R.id.tabcur_load);
 
         listCurso = (ListView) rootView.findViewById(R.id.listCurso);
 
@@ -47,6 +51,8 @@ public class Tab_Curso extends Fragment {
     //Metodo que consulta el servicio escolaridad
     public void cargarEscolaridad()
     {
+        listCurso.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         per = new Persona();
         if(loPersona.getInstancia(getContext()).SesionValida())
         {
@@ -65,6 +71,8 @@ public class Tab_Curso extends Fragment {
     //Metodo que recibe el retorno del servicio
     public void Estudios(Retorno_MsgObj retorno)
     {
+        listCurso.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             System.out.println("No posee ninguna escolaridad" + TipoMensaje.ERROR);

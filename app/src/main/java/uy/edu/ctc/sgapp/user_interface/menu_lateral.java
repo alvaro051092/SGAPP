@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class menu_lateral extends AppCompatActivity {
     private menu_lateralAdapter mlAdapter;
     private ListView listEvaluaciones;
     private EvaluacionesAdapter evaAdapter;
+    private ProgressBar loading;
 
     Object obj;
     Menu m;
@@ -62,6 +64,8 @@ public class menu_lateral extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_lateral);
+
+        loading = (ProgressBar) findViewById(R.id.menulateral_load);
 
         showActionBar();
 
@@ -103,10 +107,12 @@ public class menu_lateral extends AppCompatActivity {
             public void onClick(View view) {
                 if(drawerLayout.isDrawerOpen(listMenuLateral))
                 {
+                    loading.setVisibility(View.INVISIBLE);
                     drawerLayout.closeDrawer(listMenuLateral);
                 }
                 else
                 {
+                    loading.setVisibility(View.INVISIBLE);
                     drawerLayout.openDrawer(listMenuLateral);
                 }
             }
@@ -163,10 +169,12 @@ public class menu_lateral extends AppCompatActivity {
     //Evaluaciones para Inscripción
     public void CargarEvaluaciones()
     {
+
         per = new Persona();
         calAlumno = new CalendarioAlumno();
         if(loPersona.getInstancia(getApplicationContext()).SesionValida())
         {
+            loading.setVisibility(View.VISIBLE);
             Long PerCod = loPersona.getInstancia(getApplicationContext()).DevolverCodigoPersona();
 
             per.setPerCod(PerCod);
@@ -209,6 +217,7 @@ public class menu_lateral extends AppCompatActivity {
         evaAdapter = new EvaluacionesAdapter(getApplicationContext(), retObject.getLstObjetos(), Constantes.MENU_LATERAL.toString());
         if(listEvaluaciones != null) listEvaluaciones.setAdapter(evaAdapter);
 
+        loading.setVisibility(View.INVISIBLE);
         // 3er paso, se refresco la ListView con los datos cargados en el retObject paso 1 y 2
     }
 
@@ -251,6 +260,7 @@ public class menu_lateral extends AppCompatActivity {
                 break;
             //Cerrar Session
             case 4:
+                drawerLayout.closeDrawer(listMenuLateral);
                 CerrarSesion();
                 break;
         }
@@ -258,6 +268,7 @@ public class menu_lateral extends AppCompatActivity {
 
     private void CerrarSesion()
     {
+        loading.setVisibility(View.VISIBLE);
         if(loPersona.getInstancia(getApplicationContext()).SesionValida()) {
 
             Persona persona = new Persona();
@@ -276,8 +287,8 @@ public class menu_lateral extends AppCompatActivity {
         if(!retorno.SurgioError()){
 
             loPersona.getInstancia(getApplicationContext()).QuitarCodigoPersona();
-            Toast.makeText(getApplicationContext(), "Sesion cerrada correctamente", Toast.LENGTH_SHORT).show();
 
+            loading.setVisibility(View.INVISIBLE);
             Intent d = new Intent(this, login.class);
             startActivity(d);
         }

@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ import uy.edu.ctc.sgapp.web_service.ws_evaluacionalumno;
 import uy.edu.ctc.sgapp.web_service.ws_solicitudes;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+import static uy.edu.ctc.sgapp.R.id.listCarrera;
 import static uy.edu.ctc.sgapp.R.id.listEvalParaBorrarse;
 import static uy.edu.ctc.sgapp.enumerado.TipoSolicitud.ESCOLARIDAD;
 
@@ -44,6 +46,7 @@ public class Solicitudes extends AppCompatActivity {
     private Spinner spin_TpoSol;
     private AlertDialog.Builder dialog;
     private Retorno_MsgObj parametro;
+    private ProgressBar loading;
 
     Persona per;
     Solicitud sol;
@@ -54,6 +57,8 @@ public class Solicitudes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitudes);
 
+        loading = (ProgressBar) findViewById(R.id.sol_load);
+
         ActionBar acBar = getSupportActionBar();
         acBar.setHomeButtonEnabled(true);
         acBar.setDisplayHomeAsUpEnabled(true);
@@ -61,11 +66,6 @@ public class Solicitudes extends AppCompatActivity {
         dialog = new AlertDialog.Builder(this);
 
         lstSolicitudes = (ListView) findViewById(R.id.lst_Solicitudes);
-
-
-
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btn_add_solicitud);
         fab.setOnClickListener(new View.OnClickListener()
@@ -122,15 +122,7 @@ public class Solicitudes extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
         CargarListview();
-
-
-
 
     }
 
@@ -204,6 +196,8 @@ public class Solicitudes extends AppCompatActivity {
 
     public void CargarListview()
     {
+        lstSolicitudes.setVisibility(View.INVISIBLE);
+        loading.setVisibility(View.VISIBLE);
         per = new Persona();
         sol = new Solicitud();
 
@@ -226,6 +220,8 @@ public class Solicitudes extends AppCompatActivity {
     //metodo que recibe las solicitudes activas
     public void retornoSolicitudesActivas(Retorno_MsgObj retorno)
     {
+        lstSolicitudes.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.INVISIBLE);
         if(retorno.getMensaje().getTipoMensaje() == TipoMensaje.ERROR)
         {
             Toast.makeText(getApplicationContext(), "Aún no tiene Solicitudes", Toast.LENGTH_LONG).show();

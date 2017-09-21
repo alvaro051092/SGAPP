@@ -116,7 +116,7 @@ public class EvaluacionesAdapter extends BaseAdapter{
 
                 if(pant.equals(Constantes.BORRAR.toString())) {
                     dialog.setMessage("¿Desea Borrarse su inscripcion?");
-                    dialog.setCancelable(false);
+                    dialog.setCancelable(true);
                     dialog.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int i)
