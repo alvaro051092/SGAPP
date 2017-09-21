@@ -99,10 +99,6 @@ public class Tab_Carrera extends Fragment {
 
                 if (listCarrera != null) listCarrera.setAdapter(cur_carAdapter);
             }
-            else
-            {
-                Toast.makeText(getContext(), "No tiene Evaluaciones de la Carrera", Toast.LENGTH_LONG).show();
-            }
         }
     }
 }

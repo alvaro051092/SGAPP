@@ -79,8 +79,7 @@ public class Tab_Curso extends Fragment {
             {
                 System.out.println("ESC: " + obj.toString());
                 Escolaridad esc = (Escolaridad) obj;
-//                System.out.println("ESC: " + esc.toString());
-//                System.out.println("ESC: " + esc.getCurso());
+
                 if(esc.getModulo() != null || esc.getCurso() != null)
                 {
                     lstObj.add(esc);
@@ -91,10 +90,6 @@ public class Tab_Curso extends Fragment {
                 cur_carAdapter = new curso_carreraAdapter(getContext(), lstObj);
 
                 if (listCurso != null) listCurso.setAdapter(cur_carAdapter);
-            }
-            else
-            {
-                Toast.makeText(getContext(), "No tiene Evaluaciones del Curso", Toast.LENGTH_LONG).show();
             }
         }
     }
